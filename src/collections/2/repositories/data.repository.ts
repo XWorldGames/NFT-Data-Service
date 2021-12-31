@@ -14,7 +14,7 @@ export interface IGear {
   animated: boolean
   properties: {
     class: number
-    part: number
+    slot: number
   }
   graded: {
     level: number

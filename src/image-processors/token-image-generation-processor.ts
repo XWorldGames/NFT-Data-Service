@@ -213,7 +213,7 @@ export class TokenImageGenerationProcessor {
           buffer = await this.resolveCompositionMode2Resource(
             String(valueMap[uses])
               .split('')
-              .map(char => path.replace('{#}', char)),
+              .map(char => path.replace('{#}', char.charCodeAt(0).toString())),
             direction,
             gap,
             resizingOption,

@@ -11,7 +11,7 @@ export interface ITokenMetadata extends ITokenMetadataBase {
   properties: {
     grade: number
     class: number
-    part: number
+    slot: number
     level: number
     star: number
     generation: number
@@ -47,7 +47,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     const defense = properties.defense
     const attack = properties.attack
     const characterClass = gear.properties.class
-    const part = gear.properties.part
+    const slot = gear.properties.slot
 
     return new (class implements ITokenMetadata {
       id = Number(tokenId)
@@ -60,7 +60,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
       animated = gear.animated
       properties = {
         class: characterClass,
-        part,
+        slot,
         grade,
         level,
         star,
@@ -89,7 +89,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     const defense = properties.defense
     const attack = properties.attack
     const characterClass = gear.properties.class
-    const part = gear.properties.part
+    const slot = gear.properties.slot
 
     return new (class implements ITokenMetadata {
       id = 0
@@ -102,7 +102,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
       animated = gear.animated
       properties = {
         class: characterClass,
-        part,
+        slot,
         grade,
         level,
         star,

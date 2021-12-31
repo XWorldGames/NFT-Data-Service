@@ -1,0 +1,24 @@
+{
+  "env": "production",
+  "log": {
+    "format": "combined",
+    "dir": "../logs"
+  },
+  "db": {
+    "dir": "../data"
+  },
+  "resource": {
+    "dir": "../resource"
+  },
+  "tls": {
+    "key": "../certs/server.key",
+    "cert": "../certs/server.crt"
+  },
+  "node": {
+    "endpoint": "https://bsc.node.xwg.games/"
+  },
+  "contracts": {
+    "1": "0x88881808f5C6C0B25D5F4c2523E3948c33857013",
+    "2": ""
+  }
+}

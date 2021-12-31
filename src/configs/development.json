@@ -1,0 +1,24 @@
+{
+  "env": "development",
+  "log": {
+    "format": "dev",
+    "dir": "../logs"
+  },
+  "db": {
+    "dir": "../data"
+  },
+  "resource": {
+    "dir": "../resource"
+  },
+  "tls": {
+    "key": "../certs/server.key",
+    "cert": "../certs/server.crt"
+  },
+  "node": {
+    "endpoint": "https://data-seed-prebsc-1-s1.binance.org:8545"
+  },
+  "contracts": {
+    "1": "0xd686E330BeE49523E0EED75151A0e5d5C6dCC60e",
+    "2": "0xd9d092b407405654c6239eD417E10Ed5D3A618AF"
+  }
+}

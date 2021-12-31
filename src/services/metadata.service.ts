@@ -3,6 +3,7 @@ import { IMetadataEntity, MetadataEntity } from '@/entities/metadata.entity'
 import { TokenRepository } from '@/repositories/token.repository'
 import { ITokenMetadataNormalizer } from '@interfaces/token-metadata.normalizer.interface'
 import { MetadataRepository } from '@repositories/metadata.repository'
+import { logger } from '@utils/logger'
 import objectHash from 'object-hash'
 import { Container, Inject, Service } from 'typedi'
 
@@ -22,22 +23,34 @@ export class MetadataService {
     this.normalizers = normalizers
   }
 
-  async findByTokenId(collectionId: number, tokenId: number): Promise<IMetadataEntity> {
-    let metadata = await this.tokenRepository.get(collectionId, tokenId)
-    metadata = this.normalizers[collectionId].normalize(tokenId, metadata)
-
+  async findByTokenId(collectionId: number, tokenId: number): Promise<IMetadataEntity | null> {
     const key = this.metadataRepository.resolveKey(collectionId, tokenId)
-    let data = await this.metadataRepository.get(key)
-
-    if (metadata) {
-      const hash = objectHash(metadata)
-      if (!data || hash !== data.hash) {
-        data = new MetadataEntity(hash, metadata)
-        await this.metadataRepository.put(key, data)
+    let metadata = await this.metadataRepository.get(key)
+    let token
+    try {
+      const data = await this.tokenRepository.get(collectionId, tokenId)
+      if (data) {
+        token = this.normalizers[collectionId].normalize(tokenId, data)
+      }
+    } catch (error) {
+      if (error.code !== 'CALL_EXCEPTION') {
+        logger.error(`[SERVICE] MetadataService.findByTokenId(${collectionId}, ${tokenId}), Message:: ${error.message}`)
+        return metadata || null
       }
     }
 
-    return data
+    if (token) {
+      const hash = objectHash(token)
+      if (!metadata || hash !== metadata.hash) {
+        metadata = new MetadataEntity(hash, token)
+        await this.metadataRepository.put(key, metadata)
+      }
+    } else if (metadata) {
+      metadata = null
+      await this.metadataRepository.del(key)
+    }
+
+    return metadata
   }
 
   async getMockTokenByIdentifierWithGivenData(collectionId: number, identifier: number, mockData: any): Promise<IMetadataEntity> {

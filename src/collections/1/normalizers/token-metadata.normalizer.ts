@@ -1,5 +1,6 @@
 import { ITokenMetadata as ITokenMetadataBase } from '@/interfaces/token-metadata.interface'
 import { ITokenMetadataNormalizer } from '@/interfaces/token-metadata.normalizer.interface'
+import { isEmpty } from '@utils/util'
 import { Inject, Service } from 'typedi'
 import id from '../id'
 import { DataRepository } from '../repositories/data.repository'
@@ -24,23 +25,23 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
   @Inject()
   private readonly dataRepository: DataRepository
 
-  normalize(tokenId: number, metadata: any): ITokenMetadata | null {
-    if (!metadata) {
+  normalize(tokenId: number, data: any): ITokenMetadata | null {
+    if (isEmpty(data) || isEmpty(data.role)) {
       return null
     }
 
-    const character = this.dataRepository.findCharacterByTokenRepositoryId(Number(metadata.role[0]))
+    const character = this.dataRepository.findCharacterByTokenRepositoryId(Number(data.role[0]))
     if (!character) {
       return null
     }
 
-    const grade = Number(metadata.grade)
-    const star = Number(metadata.role[2])
-    const generation = Number(metadata.role[1])
-    const experience = Number(metadata.role[3])
-    const element = Number(metadata.fiveElement)
-    const health = Number(metadata.role[4])
-    const attack = Number(metadata.role[5])
+    const grade = Number(data.grade)
+    const star = Number(data.role[2])
+    const generation = Number(data.role[1])
+    const experience = Number(data.role[3])
+    const element = Number(data.fiveElement)
+    const health = Number(data.role[4])
+    const attack = Number(data.role[5])
 
     return new (class implements ITokenMetadata {
       id = Number(tokenId)

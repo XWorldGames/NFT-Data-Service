@@ -27,6 +27,10 @@ export class MetadataRepository {
     }
   }
 
+  async del(key: string) {
+    await this.db.del(key)
+  }
+
   async put(key: string, data: IMetadataEntity): Promise<void> {
     await this.db.put(key, data)
   }

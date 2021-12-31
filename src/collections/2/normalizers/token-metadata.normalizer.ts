@@ -1,5 +1,6 @@
 import { ITokenMetadata as ITokenMetadataBase } from '@/interfaces/token-metadata.interface'
 import { ITokenMetadataNormalizer } from '@/interfaces/token-metadata.normalizer.interface'
+import { isEmpty } from '@utils/util'
 import { Inject, Service } from 'typedi'
 import id from '../id'
 import { DataRepository } from '../repositories/data.repository'
@@ -26,19 +27,19 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
   @Inject()
   private readonly dataRepository: DataRepository
 
-  normalize(tokenId: number, metadata: any): ITokenMetadata | null {
-    if (!metadata) {
+  normalize(tokenId: number, data: any): ITokenMetadata | null {
+    if (isEmpty(data) || Number(data.role) === 0) {
       return null
     }
 
-    const gear = this.dataRepository.findGearByTokenClassAndClassGearId(Number(metadata.role), Number(metadata.equip))
+    const gear = this.dataRepository.findGearByTokenClassAndClassGearId(Number(data.role), Number(data.equip))
     if (!gear) {
       return null
     }
 
-    const grade = Number(metadata.grade)
-    const level = Number(metadata.level)
-    const experience = Number(metadata.exp)
+    const grade = Number(data.grade)
+    const level = Number(data.level)
+    const experience = Number(data.exp)
     const star = level % 5
     const generation = Math.floor(level / 5)
     const { properties } = gear.graded.find(item => item.level === grade)

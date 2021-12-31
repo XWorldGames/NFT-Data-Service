@@ -1,5 +1,4 @@
 import { BlockchainService, Contract } from '@services/blockchain.service'
-import { logger } from '@utils/logger'
 import config from 'config'
 import { Service } from 'typedi'
 import abi from '../abi.json'
@@ -14,12 +13,6 @@ export class TokenRepository {
   }
 
   async get(tokenId: number) {
-    try {
-      const data = await this.contract.get(tokenId)
-      return data && data.role.length > 0 ? data : null
-    } catch (error) {
-      logger.error(`[BLOCKCHAIN] TokenRepository.get() >> ${id}:${tokenId}, Message:: ${error.message}`)
-      return null
-    }
+    return await this.contract.get(tokenId)
   }
 }

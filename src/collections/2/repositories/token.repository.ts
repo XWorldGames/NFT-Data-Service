@@ -16,7 +16,7 @@ export class TokenRepository {
   async get(tokenId: number) {
     try {
       const data = await this.contract.getNftData(tokenId)
-      return data && data.role.length > 0 ? data : null
+      return data && data.role > 0 ? data : null
     } catch (error) {
       logger.error(`[BLOCKCHAIN] TokenRepository.get() >> ${id}:${tokenId}, Message:: ${error.message}`)
       return null

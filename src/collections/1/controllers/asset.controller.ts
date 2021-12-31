@@ -80,7 +80,7 @@ export class AssetController extends AbstractAssetController {
     return this.getCharacterAvatarAsset(character, resizingOptions, knownHash)
   }
 
-  @Get('/skills/:skillId([0-9]+):resizing([.@][.0-9a-z_]+)?')
+  @Get('/skills/icons/:skillId([0-9]+):resizing([.@][.0-9a-z_]+)?')
   async getSkillAssetById(
     @Param('skillId') skillId: number,
     @ImageResizingParam('resizing') resizingOptions?: IImageResizingOptions,

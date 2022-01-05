@@ -1,8 +1,8 @@
+import { HashedImageEntity } from '@/entities/hashed-image.entity'
+import { NotModifiedResponse } from '@/http/not-modified.response'
 import { Response } from 'express'
 import { Action, Interceptor, InterceptorInterface } from 'routing-controllers'
 import { Service } from 'typedi'
-import { HashedImageEntity } from '../entities/hashed-image.entity'
-import { NotModifiedResponse } from '../http/not-modified.response'
 
 @Interceptor()
 @Service()

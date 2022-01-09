@@ -1,3 +1,0 @@
-[
-  "function getMysteryBoxData(uint256 tokenId) view returns (uint32 mbType, uint32 mbTypeId)"
-]

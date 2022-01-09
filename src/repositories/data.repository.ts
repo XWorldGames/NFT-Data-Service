@@ -1,5 +1,6 @@
 import { getDataRepositories } from '@/collection'
 import { IImageCompositionConfiguration } from '@interfaces/image-composition-configuration.interface'
+import { ContractInterface } from '@services/blockchain.service'
 import { Container, Service } from 'typedi'
 
 @Service()
@@ -14,6 +15,10 @@ export class DataRepository {
 
   getProvider(collectionId: number) {
     return this.providers[collectionId]
+  }
+
+  getAbi(collectionId: number): ContractInterface {
+    return this.getProvider(collectionId).getAbi()
   }
 
   getImageCompositionConfiguration(collectionId: number): IImageCompositionConfiguration {

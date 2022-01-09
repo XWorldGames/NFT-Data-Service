@@ -1,3 +1,0 @@
-[
-  "function get(uint256 id) view returns (uint32[] role, uint256 grade, uint256[] skills, uint256 fiveElement)"
-]

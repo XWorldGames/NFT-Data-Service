@@ -1,3 +1,0 @@
-[
-  "function getNftData(uint256 tokenId) view returns (tuple(uint8 equip, uint8 role, uint8 grade, uint8 level, uint32 exp) data)"
-]

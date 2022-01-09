@@ -8,17 +8,29 @@
     "dir": "../data"
   },
   "resource": {
-    "dir": "../resource"
+    "dir": "../resource/dist"
   },
   "tls": {
     "key": "../certs/server.key",
     "cert": "../certs/server.crt"
   },
   "node": {
-    "endpoint": "https://data-seed-prebsc-1-s1.binance.org:8545"
+    "endpoint": "https://bsc-testnet.node.xwg.games/"
   },
   "contracts": {
     "1": "0xd686E330BeE49523E0EED75151A0e5d5C6dCC60e",
-    "2": "0xd9d092b407405654c6239eD417E10Ed5D3A618AF"
+    "2": "0xd9d092b407405654c6239eD417E10Ed5D3A618AF",
+    "3": "0xbf54BD1CC777636fa337c22f6B37b0c9060c12f9",
+    "4": "0x295c97D7345c59fABb641057097DD109a7fc8895",
+    "5": "0x952685FaF67bE15c8ae6afB32d819DdEE471E0A7"
+  },
+  "image": {
+    "url": {
+      "1": "https://image-dev.nft.xwg.games/tokens/{collectionId}/{tokenId}",
+      "2": "https://image-dev.nft.xwg.games/tokens/{collectionId}/{tokenId}",
+      "3": "https://image-dev.nft.xwg.games/tokens/{collectionId}/{tokenId}",
+      "4": "https://image-dev.nft.xwg.games/tokens/{collectionId}/{tokenId}",
+      "5": "https://image-dev.nft.xwg.games/tokens/{collectionId}/{tokenId}"
+    }
   }
 }

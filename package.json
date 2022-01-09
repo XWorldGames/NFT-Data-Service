@@ -1,6 +1,6 @@
 {
-  "name": "@xworldgames/nftis",
-  "description": "X World Games NFT image service.",
+  "name": "@xworldgames/nftds",
+  "description": "X World Games NFT data service.",
   "author": "X World Games <dev@xwg.games>",
   "license": "MIT",
   "scripts": {
@@ -38,7 +38,6 @@
     "morgan": "^1.10.0",
     "object-hash": "^2.2.0",
     "pm2": "^5.1.0",
-    "r": "0.0.5",
     "reflect-metadata": "^0.1.13",
     "routing-controllers": "^0.9.0",
     "sharp": "^0.29.3",

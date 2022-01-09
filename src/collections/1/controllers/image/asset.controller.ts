@@ -7,8 +7,8 @@ import { AbstractAssetController, routePrefix } from '@controllers/abstract.asse
 import { HttpNotFoundException } from '@exceptions/http-not-found.exception'
 import { Controller, Get, Param } from 'routing-controllers'
 import { Inject, Service } from 'typedi'
-import id from '../id'
-import { DataRepository } from '../repositories/data.repository'
+import id from '../../id'
+import { DataRepository } from '../../repositories/data.repository'
 
 @Controller(`/${routePrefix}/${id}`)
 @Service()

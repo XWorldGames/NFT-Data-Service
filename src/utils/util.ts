@@ -17,7 +17,8 @@ export function isEmpty(value: string | number | object): boolean {
 export function validateEnv() {
   cleanEnv(process.env, {
     NODE_ENV: str(),
-    PORT: port(),
+    IMAGE_PORT: port(),
+    METADATA_PORT: port(),
   })
 }
 

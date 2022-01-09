@@ -10,7 +10,7 @@ import { Service } from 'typedi'
 
 @Controller()
 @Service()
-export class TokenController extends AbstractImageController {
+export class ImageTokenController extends AbstractImageController {
   @Get('/tokens/:collectionId([0-9]+)/:tokenId([0-9]+):resizing([.@][.0-9a-z_]+)?')
   async get(
     @Param('collectionId') collectionId: number,

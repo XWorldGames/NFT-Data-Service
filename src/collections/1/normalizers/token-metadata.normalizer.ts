@@ -7,8 +7,8 @@ import { DataRepository } from '../repositories/data.repository'
 
 export interface ITokenMetadata extends ITokenMetadataBase {
   code: string
-  name: string
   properties: {
+    identifier: number
     grade: number
     star: number
     generation: number
@@ -17,6 +17,9 @@ export interface ITokenMetadata extends ITokenMetadataBase {
     health: number
     attack: number
     base_attack_time: number
+    win: number
+    lose: number
+    skills: { [k: string]: { identifier: number; name: string; level: number }[] }
   }
 }
 
@@ -36,12 +39,34 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     }
 
     const grade = Number(data.grade)
-    const star = Number(data.role[2])
-    const generation = Number(data.role[1])
-    const experience = Number(data.role[3])
     const element = Number(data.fiveElement)
+    const generation = Number(data.role[1])
+    const star = Number(data.role[2])
+    const experience = Number(data.role[3])
     const health = Number(data.role[4])
     const attack = Number(data.role[5])
+    const win = Number(data.role[6])
+    const lose = Number(data.role[7])
+
+    const skills = {
+      1: Array(4).fill(null),
+      2: [],
+    }
+    data.skills.forEach((index, slot) => {
+      index = index.toNumber()
+      character.properties.skills['1'][slot].some(skill => {
+        const level = skill.level.find(item => item.index === index)
+        if (level === undefined) {
+          return false
+        }
+        skills[1][slot] = {
+          identifier: skill.id,
+          name: skill.name,
+          level: level.value,
+        }
+        return true
+      })
+    })
 
     return new (class implements ITokenMetadata {
       id = Number(tokenId)
@@ -49,10 +74,12 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
       identifier = character.id
       code = character.code
       name = character.name
+      description = character.description
       event = character.event
       special = character.special
       animated = character.animated
       properties = {
+        identifier: character.id,
         grade,
         star,
         generation,
@@ -61,6 +88,9 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         health,
         attack,
         base_attack_time: character.graded.find(item => item.level === grade).properties.base_attack_time,
+        skills,
+        win,
+        lose,
       }
     })()
   }
@@ -78,6 +108,9 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     const element = data.element || 0
     const health = data.health || character.properties.health
     const attack = data.attack || character.properties.attack
+    const win = 0
+    const lose = 0
+    const skills = { 1: [], 2: [] }
 
     return new (class implements ITokenMetadata {
       id = 0
@@ -85,10 +118,12 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
       identifier = character.id
       code = character.code
       name = character.name
+      description = character.description
       event = character.event
       special = character.special
       animated = character.animated
       properties = {
+        identifier: character.id,
         grade,
         star,
         generation,
@@ -97,6 +132,9 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         health,
         attack,
         base_attack_time: character.graded.find(item => item.level === grade).properties.base_attack_time,
+        skills,
+        win,
+        lose,
       }
     })()
   }

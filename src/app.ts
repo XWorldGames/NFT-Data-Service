@@ -1,5 +1,3 @@
-process.env['NODE_CONFIG_DIR'] = __dirname + '/configs'
-
 import errorMiddleware from '@middlewares/error.middleware'
 import { readFileSync, resolvePath } from '@utils/filesystem'
 import { logger, stream } from '@utils/logger'
@@ -16,11 +14,13 @@ class App {
   public app: express.Application
   public port: number
   public env: string
+  public h2: boolean
 
-  constructor(Controllers: Function[]) {
+  constructor(Controllers: Function[], port: number, h2: boolean) {
     this.app = express()
-    this.port = Number(process.env.PORT || 3000)
+    this.port = port
     this.env = process.env.NODE_ENV || 'development'
+    this.h2 = h2
     this.app.use(express.static(resolvePath('../public')))
 
     this.initializeMiddlewares()
@@ -29,23 +29,24 @@ class App {
   }
 
   public listen() {
-    spdy
-      .createServer(
-        {
-          key: readFileSync(config.get('tls.key')),
-          cert: readFileSync(config.get('tls.cert')),
-          spdy: {
-            protocols: ['h2'],
+    ;(this.h2
+      ? spdy.createServer(
+          {
+            key: readFileSync(config.get('tls.key')),
+            cert: readFileSync(config.get('tls.cert')),
+            spdy: {
+              protocols: ['h2'],
+            },
           },
-        },
-        this.app,
-      )
-      .listen(this.port, () => {
-        logger.info(`=================================`)
-        logger.info(`======= ENV: ${this.env} =======`)
-        logger.info(`🚀 App listening on the port ${this.port}`)
-        logger.info(`=================================`)
-      })
+          this.app,
+        )
+      : this.app
+    ).listen(this.port, () => {
+      logger.info(`=================================`)
+      logger.info(`======= ENV: ${this.env} =======`)
+      logger.info(`🚀 App listening on the port ${this.port}`)
+      logger.info(`=================================`)
+    })
   }
 
   public getServer() {

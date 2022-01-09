@@ -9,6 +9,7 @@ export interface ITokenMetadata extends ITokenMetadataBase {
   code: string
   name: string
   properties: {
+    identifier: number
     grade: number
     class: number
     slot: number
@@ -55,10 +56,12 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
       identifier = gear.id
       code = gear.code
       name = gear.name
+      description = gear.description
       event = gear.event
       special = gear.special
       animated = gear.animated
       properties = {
+        identifier: gear.id,
         class: characterClass,
         slot,
         grade,
@@ -97,10 +100,12 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
       identifier = gear.id
       code = gear.code
       name = gear.name
+      description = gear.description
       event = gear.event
       special = gear.special
       animated = gear.animated
       properties = {
+        identifier: gear.id,
         class: characterClass,
         slot,
         grade,

@@ -1,36 +1,3 @@
 [
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
-      }
-    ],
-    "name": "get",
-    "outputs": [
-      {
-        "internalType": "uint32[]",
-        "name": "role",
-        "type": "uint32[]"
-      },
-      {
-        "internalType": "uint256",
-        "name": "grade",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "skills",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "uint256",
-        "name": "fiveElement",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  }
+  "function get(uint256 id) view returns (uint32[] role, uint256 grade, uint256[] skills, uint256 fiveElement)"
 ]

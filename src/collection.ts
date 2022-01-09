@@ -1,4 +1,6 @@
-const _controllers = []
+const _imageControllers = []
+
+const _metadataControllers = []
 
 const _metadataNormalizers = {}
 
@@ -6,8 +8,12 @@ const _dataRepositories = {}
 
 const _tokenRepositories = {}
 
-export function registerControllers(controllers) {
-  controllers.forEach(controller => _controllers.push(controller))
+export function registerImageControllers(controllers) {
+  controllers.forEach(controller => _imageControllers.push(controller))
+}
+
+export function registerMetadataControllers(controllers) {
+  controllers.forEach(controller => _metadataControllers.push(controller))
 }
 
 export function registerMetadataNormalizer(id, normalizer) {
@@ -34,6 +40,10 @@ export function getTokenRepositories() {
   return _tokenRepositories
 }
 
-export function getControllers() {
-  return _controllers
+export function getImageControllers() {
+  return _imageControllers
+}
+
+export function getMetadataControllers() {
+  return _metadataControllers
 }

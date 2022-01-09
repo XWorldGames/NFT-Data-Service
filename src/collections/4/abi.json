@@ -1,0 +1,3 @@
+[
+  "function exists(uint256 tokenId) view returns (bool)"
+]

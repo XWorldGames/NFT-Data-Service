@@ -6,6 +6,7 @@ import id from '../id'
 export interface ICharacterSkill {
   id: number
   name: string
+  level: { index: number; value: number; code: string }[]
 }
 
 export interface ICharacter {

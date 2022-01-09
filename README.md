@@ -1,43 +1,76 @@
-# X World Games NFTIS
+# X World Games NFTDS
 
 ## Introduction
 
-The NFTIS (NFT Image Service) is a service that provides unified access to image resources for all X World Games NFT products. You can get all public image resources through this service.
+The NFTDS (NFT Data Service) is a service that provides unified access to data resources for all X World Games NFT products. You can get all public data resources through this service.
 
-## Hosts
+## Metadata Service
 
-### Production
+### Hosts
+
+#### Production
+
+```
+https://metadata.nft.xwg.games/
+```
+
+#### Development
+
+```
+https://metadata-dev.nft.xwg.games/
+```
+
+### URL Templates
+
+#### Parameters
+
+| Name           | Description                                                                                                                                                                                   |
+|:---------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `collectionId` | The collection ID of the NFT.<br/>- `1` DreamCard Cards<br/>- `2` DreamCard Gears<br/>- `3` DreamCard Mystery Boxes of Gear<br/>- `4` DreamCard Level Assets<br/>- `5` DreamCard Level Prizes |
+| `tokenId`      | The token ID of the NFT.                                                                                                                                                                      |
+
+#### Get a Token's Metadata
+
+```
+/{collectionId}/{tokenId}
+```
+
+## Image Service
+
+### Hosts
+
+#### Production
 
 ```
 https://image.nft.xwg.games/
 ```
 
-### Development
+#### Development
 
 ```
 https://image-dev.nft.xwg.games/
 ```
 
-## URL Templates
+### URL Templates
 
-### NFT Images
+#### NFT Images
 
-#### Parameters
+##### Parameters
 
-| Name           | Description                                                                        |
-|:---------------|:-----------------------------------------------------------------------------------|
-| `collectionId` | The collection ID of the NFT.<br/> - `1` DreamCard Cards<br/>- `2` DreamCard Gears |
-| `tokenId`      | The token ID of the NFT.                                                           |
+| Name           | Description                                                                                                                                                                                   |
+|:---------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `collectionId` | The collection ID of the NFT.<br/>- `1` DreamCard Cards<br/>- `2` DreamCard Gears<br/>- `3` DreamCard Mystery Boxes of Gear<br/>- `4` DreamCard Level Assets<br/>- `5` DreamCard Level Prizes |
+| `tokenId`      | The token ID of the NFT.                                                                                                                                                                      |
 
-#### Get a Token's Image
+##### Get a Token's Image
 
 ```
 /tokens/{collectionId}/{tokenId}
 ```
 
-### Cards Image Assets
+#### Cards Image Assets
 
-#### Parameters
+##### Parameters
 
 | Name            | Description                                                                                                                |
 |:----------------|:---------------------------------------------------------------------------------------------------------------------------|
@@ -49,37 +82,37 @@ https://image-dev.nft.xwg.games/
 | `skillCode`     | The skill code starts with `SKL`.                                                                                          |
 | `version`       | The version of the DreamCard.<br/>- `1` 1.0<br/>- `2` 2.0                                                                  |
 
-#### Get a Token's Image with Base Stat
+##### Get a Token's Image with Base Stat
 
 ```
 /assets/1/tokens/{characterId}/{grade}-{element}
 /assets/1/tokens/{characterCode}/{grade}-{element}
 ```
 
-#### Get a Character's Full Body Painting
+##### Get a Character's Full Body Painting
 
 ```
 /assets/1/characters/paintings/{characterId}
 /assets/1/characters/paintings/{characterCode}
 ```
 
-#### Get a Character's Avatar
+##### Get a Character's Avatar
 
 ```
 /assets/1/characters/avatars/{characterId}
 /assets/1/characters/avatars/{characterCode}
 ```
 
-#### Get a Skill's Icon
+##### Get a Skill's Icon
 
 ```
 /assets/1/skills/icons/{skillId}
 /assets/1/skills/icons/{version}/{skillCode}
 ```
 
-### Gears Image Assets
+#### Gears Image Assets
 
-#### Parameters
+##### Parameters
 
 | Name          | Description                                                                                                                                                                   |
 |:--------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -89,7 +122,7 @@ https://image-dev.nft.xwg.games/
 | `classGearId` | The gear ID of the character class. Which is the `equip` parameter in the contract.                                                                                           |
 | `grade`       | The grade of the gear.<br/>- `1` Common<br/>- `2` Rare<br/>- `3` Epic<br/>- `4` Legendary<br/>- `5` Myth                                                                      |
 
-#### Get a Token's Image with Base Stat
+##### Get a Token's Image with Base Stat
 
 ```
 /assets/2/tokens/{gearId}/{grade}
@@ -97,7 +130,7 @@ https://image-dev.nft.xwg.games/
 /assets/2/tokens/{class}-{classGearId}/{grade}
 ```
 
-#### Get a Gear's Icon
+##### Get a Gear's Icon
 
 ```
 /assets/2/gears/icons/{gearId}
@@ -105,19 +138,19 @@ https://image-dev.nft.xwg.games/
 /assets/2/gears/icons/{class}-{classGearId}
 ```
 
-## Image Resizing
+### Image Resizing
 
 All resource URLs support image resizing, just simply add a string parameter list starts with the `@` symbol at the end of the resource URL.
 
-### Parameter Format
+#### Parameter Format
 
 Concatenate the parameter value and name directly. For example, `200w` means specify the target width is `200px`, `100h` means specify the target height is `100px`.
 
-### Parameter List Format
+#### Parameter List Format
 
 Use the underscore `_` to concatenate all the parameters to be passed. For example, `200w_100h_1l_90q`.
 
-### Supported Parameters
+#### Supported Parameters
 
 | Name | Value Range               | Default Value | Description                                                                                                                                                                                                                                                                                                                                  |
 |:-----|:--------------------------|:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -129,11 +162,11 @@ Use the underscore `_` to concatenate all the parameters to be passed. For examp
 | `q`  | `1` - `100`               | `80`          | Specify the percentage of the target quality.                                                                                                                                                                                                                                                                                                |
 | `r`  | `0` &#124; `1`            | `0`           | Specify use the progressive JPEG.<br/>- `0` use non-progressive JPEG.<br/>- `1` use progressive JPEG.<br/>_This parameter only makes sense if the target is in JPEG format._                                                                                                                                                                 |
 
-## Image Format Conversion
+### Image Format Conversion
 
 The resource URL does not use any extension to explicitly indicate the image format of the response. For static image resources, the default format is PNG, and for animation image resources, the default format is GIF. You can convert the format you want to use as needed, just add the extension at the end of the resource URL. If used with resizing, the extension must be at the end of the URL. For example, `.jpg`, `.webp`.
 
-### Supported Extensions
+#### Supported Extensions
 
 - `jpg`
 - `jpeg`

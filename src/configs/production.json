@@ -8,7 +8,7 @@
     "dir": "../data"
   },
   "resource": {
-    "dir": "../resource"
+    "dir": "../resource/dist"
   },
   "tls": {
     "key": "../certs/server.key",
@@ -19,6 +19,18 @@
   },
   "contracts": {
     "1": "0x88881808f5C6C0B25D5F4c2523E3948c33857013",
-    "2": ""
+    "2": "",
+    "3": "",
+    "4": "",
+    "5": ""
+  },
+  "image": {
+    "url": {
+      "1": "https://image.nft.xwg.games/tokens/{collectionId}/{tokenId}",
+      "2": "https://image.nft.xwg.games/tokens/{collectionId}/{tokenId}",
+      "3": "https://image.nft.xwg.games/tokens/{collectionId}/{tokenId}",
+      "4": "https://image.nft.xwg.games/tokens/{collectionId}/{tokenId}",
+      "5": "https://image.nft.xwg.games/tokens/{collectionId}/{tokenId}"
+    }
   }
 }

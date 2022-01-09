@@ -8,13 +8,17 @@ import { useContainer } from 'routing-controllers'
 import '@/collections'
 import App from '@/app'
 import { validateEnv } from '@utils/util'
-import { getControllers } from '@/collection'
-import { TokenController } from '@controllers/token.controller'
+import { getImageControllers, getMetadataControllers } from '@/collection'
+import { ImageTokenController } from '@controllers/image/image-token.controller'
+import { MetadataController } from '@controllers/metadata/metadata.controller'
 import { EmptyController } from '@controllers/empty.controller'
 import '@interceptors/response.interceptor'
 
 validateEnv()
 useContainer(Container)
 
-const app = new App(getControllers().concat([TokenController, EmptyController]))
-app.listen()
+const imagePort = Number(process.env.IMAGE_PORT || 9001)
+const metadataPort = Number(process.env.METADATA_PORT || 9002)
+
+new App(getImageControllers().concat([ImageTokenController, EmptyController]), imagePort, true).listen()
+new App(getMetadataControllers().concat([MetadataController, EmptyController]), metadataPort, false).listen()

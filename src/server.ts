@@ -20,5 +20,5 @@ useContainer(Container)
 const imagePort = Number(process.env.IMAGE_PORT || 9001)
 const metadataPort = Number(process.env.METADATA_PORT || 9002)
 
-new App(getImageControllers().concat([ImageTokenController, EmptyController]), imagePort, true).listen()
+new App(getImageControllers().concat([ImageTokenController, EmptyController]), imagePort, false).listen()
 new App(getMetadataControllers().concat([MetadataController, EmptyController]), metadataPort, false).listen()

@@ -25,7 +25,7 @@ export class MetadataController {
       return {
         name: data.name,
         description: data.description,
-        image: imageUrl,
+        image: `${imageUrl}?${metadata.hash}`,
         external_url: 'https://xwg.games/',
         properties: data['properties'] ?? {},
       }

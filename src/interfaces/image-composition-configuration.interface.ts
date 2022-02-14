@@ -70,6 +70,7 @@ export interface IImageCompositionElement {
   fit?: IImageCompositionFitMode | null
   position?: IImageCompositionElementPosition | null
   resource: IImageCompositionResource
+  when?: object & ((any) => boolean)
 }
 
 export interface IImageCompositionRuleAnimation {

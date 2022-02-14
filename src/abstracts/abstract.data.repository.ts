@@ -3,6 +3,7 @@ import { ContractInterface } from '@services/blockchain.service'
 import { readJsonFileSync, resolvePath } from '@utils/filesystem'
 import chokidar from 'chokidar'
 import config from 'config'
+import { compile } from 'mql-match'
 
 export abstract class AbstractDataRepository {
   protected readonly collectionId: number
@@ -47,6 +48,9 @@ export abstract class AbstractDataRepository {
       resource.path = resolvePath(this.resourceImageDir, resource.path)
       if (resource.framesPath) {
         resource.framesPath = resolvePath(this.resourceImageDir, resource.framesPath)
+      }
+      if (this.imageCompositionConfiguration.elements[k].when) {
+        this.imageCompositionConfiguration.elements[k].when = compile(this.imageCompositionConfiguration.elements[k].when)
       }
     }
   }

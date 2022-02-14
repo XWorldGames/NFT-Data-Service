@@ -430,6 +430,9 @@ export class TokenImageGenerationProcessor {
   ): Promise<ResolvedElementSet> {
     const resolved: ResolvedElementSet = {}
     for (const k of layers) {
+      if (elements[k].when && !elements[k].when(metadata)) {
+        continue
+      }
       if (!metadata.event && k === eventElementName) {
         continue
       }

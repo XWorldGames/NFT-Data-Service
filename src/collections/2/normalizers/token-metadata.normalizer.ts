@@ -33,8 +33,8 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
       return null
     }
 
-    const gear = this.dataRepository.findGearByTokenClassAndClassGearId(Number(data.role), Number(data.equip))
-    if (!gear) {
+    const equipment = this.dataRepository.findEquipmentByTokenClassAndClassEquipmentId(Number(data.role), Number(data.equip))
+    if (!equipment) {
       return null
     }
 
@@ -43,25 +43,25 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     const experience = Number(data.exp)
     const star = level % 5
     const generation = Math.ceil(level / 5)
-    const { properties } = gear.graded.find(item => item.level === grade)
+    const { properties } = equipment.graded.find(item => item.level === grade)
     const health = properties.health
     const defense = properties.defense
     const attack = properties.attack
-    const characterClass = gear.properties.class
-    const slot = gear.properties.slot
+    const characterClass = equipment.properties.class
+    const slot = equipment.properties.slot
 
     return new (class implements ITokenMetadata {
       id = Number(tokenId)
       collection_id = id
-      identifier = gear.id
-      code = gear.code
-      name = gear.name
-      description = gear.description
-      event = gear.event
-      special = gear.special
-      animated = gear.animated
+      identifier = equipment.id
+      code = equipment.code
+      name = equipment.name
+      description = equipment.description
+      event = equipment.event
+      special = equipment.special
+      animated = equipment.animated
       properties = {
-        identifier: gear.id,
+        identifier: equipment.id,
         class: characterClass,
         slot,
         grade,
@@ -77,8 +77,8 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
   }
 
   mock(identifier: number, data: any): ITokenMetadata | null {
-    const gear = this.dataRepository.findGearById(identifier)
-    if (!gear) {
+    const equipment = this.dataRepository.findEquipmentById(identifier)
+    if (!equipment) {
       return null
     }
 
@@ -87,25 +87,25 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     const experience = 0
     const star = level % 5
     const generation = Math.ceil(level / 5)
-    const { properties } = gear.graded.find(item => item.level === grade)
+    const { properties } = equipment.graded.find(item => item.level === grade)
     const health = properties.health
     const defense = properties.defense
     const attack = properties.attack
-    const characterClass = gear.properties.class
-    const slot = gear.properties.slot
+    const characterClass = equipment.properties.class
+    const slot = equipment.properties.slot
 
     return new (class implements ITokenMetadata {
       id = 0
       collection_id = id
-      identifier = gear.id
-      code = gear.code
-      name = gear.name
-      description = gear.description
-      event = gear.event
-      special = gear.special
-      animated = gear.animated
+      identifier = equipment.id
+      code = equipment.code
+      name = equipment.name
+      description = equipment.description
+      event = equipment.event
+      special = equipment.special
+      animated = equipment.animated
       properties = {
-        identifier: gear.id,
+        identifier: equipment.id,
         class: characterClass,
         slot,
         grade,

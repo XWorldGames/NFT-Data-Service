@@ -29,7 +29,7 @@ export class MetadataService {
     let token
     try {
       const data = await this.tokenRepository.get(collectionId, tokenId)
-      if (data) {
+      if (data !== undefined && data !== null) {
         token = this.normalizers[collectionId].normalize(tokenId, data)
       }
     } catch (error) {

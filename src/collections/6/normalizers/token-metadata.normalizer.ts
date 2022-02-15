@@ -1,3 +1,4 @@
+import { DataRepository } from '@/collections/6/repositories/data.repository'
 import { ITokenMetadata as ITokenMetadataBase } from '@/interfaces/token-metadata.interface'
 import { ITokenMetadataNormalizer } from '@/interfaces/token-metadata.normalizer.interface'
 import { isEmpty } from '@utils/util'
@@ -5,32 +6,32 @@ import { Service } from 'typedi'
 import id from '../id'
 
 export interface ITokenMetadata extends ITokenMetadataBase {
-  properties: {
-    type: number
-  }
+  properties: {}
 }
 
 @Service()
 export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
+  constructor(private readonly dataRepository: DataRepository) {}
+
   normalize(tokenId: number, data: any): ITokenMetadata | null {
-    if (isEmpty(data) || (data.mbType === 0 && data.mbTypeId === 0)) {
+    if (isEmpty(data)) {
       return null
     }
-
-    const type = Number(data.mbType)
+    data = this.dataRepository.getTokens().find(item => item.id === tokenId)
+    if (isEmpty(data)) {
+      return null
+    }
 
     return new (class implements ITokenMetadata {
       id = Number(tokenId)
       collection_id = id
-      identifier = type
-      name = 'Mystery Box of Equipment'
-      description = ''
+      identifier = null
+      name = data.name
+      description = data.description
       event = null
       special = false
       animated = false
-      properties = {
-        type,
-      }
+      properties = data.properties
     })()
   }
 

@@ -16,96 +16,96 @@ export class AssetController extends AbstractAssetController {
   @Inject()
   private readonly dataRepository: DataRepository
 
-  @Get('/tokens/:gearId([0-9]{8})/:grade([1-5]):resizing([.@][.0-9a-z_]+)?')
+  @Get('/tokens/:equipmentId([0-9]{8})/:grade([1-5]):resizing([.@][.0-9a-z_]+)?')
   async getMockTokenImageById(
-    @Param('gearId') gearId: number,
+    @Param('equipmentId') equipmentId: number,
     @Param('grade') grade: number,
     @ImageResizingParam('resizing') resizingOptions?: IImageResizingOptions,
     @KnownHashParam() knownHash?: string,
   ): Promise<IHashedImageEntity | NotModifiedResponse> {
-    const gear = this.dataRepository.findGearById(gearId)
-    return this.getMockTokenImage(gear, grade, resizingOptions, knownHash)
+    const equipment = this.dataRepository.findEquipmentById(equipmentId)
+    return this.getMockTokenImage(equipment, grade, resizingOptions, knownHash)
   }
 
-  @Get('/tokens/:gearCode([0-9]{1,7})/:grade([1-5]):resizing([.@][.0-9a-z_]+)?')
+  @Get('/tokens/:equipmentCode([0-9]{1,7})/:grade([1-5]):resizing([.@][.0-9a-z_]+)?')
   async getMockTokenImageByCode(
-    @Param('gearCode') gearCode: string,
+    @Param('equipmentCode') equipmentCode: string,
     @Param('grade') grade: number,
     @ImageResizingParam('resizing') resizingOptions?: IImageResizingOptions,
     @KnownHashParam() knownHash?: string,
   ): Promise<IHashedImageEntity | NotModifiedResponse> {
-    const gear = this.dataRepository.findGearByCode(gearCode)
-    return this.getMockTokenImage(gear, grade, resizingOptions, knownHash)
+    const equipment = this.dataRepository.findEquipmentByCode(equipmentCode)
+    return this.getMockTokenImage(equipment, grade, resizingOptions, knownHash)
   }
 
-  @Get('/tokens/:class([0-9]+)-:classGearId([0-9]+)/:grade([1-5]):resizing([.@][.0-9a-z_]+)?')
-  async getMockTokenImageByClassAndClassGearId(
+  @Get('/tokens/:class([0-9]+)-:classEquipmentId([0-9]+)/:grade([1-5]):resizing([.@][.0-9a-z_]+)?')
+  async getMockTokenImageByClassAndClassEquipmentId(
     @Param('class') characterClass: number,
-    @Param('classGearId') classGearId: number,
+    @Param('classEquipmentId') classEquipmentId: number,
     @Param('grade') grade: number,
     @ImageResizingParam('resizing') resizingOptions?: IImageResizingOptions,
     @KnownHashParam() knownHash?: string,
   ): Promise<IHashedImageEntity | NotModifiedResponse> {
-    const gear = this.dataRepository.findGearByTokenClassAndClassGearId(characterClass, classGearId)
-    return this.getMockTokenImage(gear, grade, resizingOptions, knownHash)
+    const equipment = this.dataRepository.findEquipmentByTokenClassAndClassEquipmentId(characterClass, classEquipmentId)
+    return this.getMockTokenImage(equipment, grade, resizingOptions, knownHash)
   }
 
-  @Get('/gears/icons/:gearId([0-9]{8}):resizing([.@][.0-9a-z_]+)?')
-  async getGearAssetById(
-    @Param('gearId') gearId: number,
+  @Get('/equipments/icons/:equipmentId([0-9]{8}):resizing([.@][.0-9a-z_]+)?')
+  async getEquipmentAssetById(
+    @Param('equipmentId') equipmentId: number,
     @ImageResizingParam('resizing') resizingOptions?: IImageResizingOptions,
     @KnownHashParam() knownHash?: string,
   ): Promise<IHashedImageEntity | NotModifiedResponse> {
-    const gear = this.dataRepository.findGearById(gearId)
-    return this.getGearAsset(gear, resizingOptions, knownHash)
+    const equipment = this.dataRepository.findEquipmentById(equipmentId)
+    return this.getEquipmentAsset(equipment, resizingOptions, knownHash)
   }
 
-  @Get('/gears/icons/:gearCode([0-9]{1,7}):resizing([.@][.0-9a-z_]+)?')
-  async getGearAssetByCode(
-    @Param('gearCode') gearCode: string,
+  @Get('/equipments/icons/:equipmentCode([0-9]{1,7}):resizing([.@][.0-9a-z_]+)?')
+  async getEquipmentAssetByCode(
+    @Param('equipmentCode') equipmentCode: string,
     @ImageResizingParam('resizing') resizingOptions?: IImageResizingOptions,
     @KnownHashParam() knownHash?: string,
   ): Promise<IHashedImageEntity | NotModifiedResponse> {
-    const gear = this.dataRepository.findGearByCode(gearCode)
-    return this.getGearAsset(gear, resizingOptions, knownHash)
+    const equipment = this.dataRepository.findEquipmentByCode(equipmentCode)
+    return this.getEquipmentAsset(equipment, resizingOptions, knownHash)
   }
 
-  @Get('/gears/icons/:class([0-9]+)-:classGearId([0-9]+):resizing([.@][.0-9a-z_]+)?')
-  async getGearAssetByClassAndClassGearId(
+  @Get('/equipments/icons/:class([0-9]+)-:classEquipmentId([0-9]+):resizing([.@][.0-9a-z_]+)?')
+  async getEquipmentAssetByClassAndClassEquipmentId(
     @Param('class') characterClass: number,
-    @Param('classGearId') classGearId: number,
+    @Param('classEquipmentId') classEquipmentId: number,
     @ImageResizingParam('resizing') resizingOptions?: IImageResizingOptions,
     @KnownHashParam() knownHash?: string,
   ): Promise<IHashedImageEntity | NotModifiedResponse> {
-    const gear = this.dataRepository.findGearByTokenClassAndClassGearId(characterClass, classGearId)
-    return this.getGearAsset(gear, resizingOptions, knownHash)
+    const equipment = this.dataRepository.findEquipmentByTokenClassAndClassEquipmentId(characterClass, classEquipmentId)
+    return this.getEquipmentAsset(equipment, resizingOptions, knownHash)
   }
 
   private async getMockTokenImage(
-    gear,
+    equipment,
     grade,
     resizingOptions: IImageResizingOptions | undefined,
     knownHash: string | undefined,
   ): Promise<IHashedImageEntity | NotModifiedResponse> {
-    if (!gear) {
+    if (!equipment) {
       throw new HttpNotFoundException()
     }
-    const image = await this.imageService.findMockTokenImage(id, gear.id, { grade }, resizingOptions, knownHash)
+    const image = await this.imageService.findMockTokenImage(id, equipment.id, { grade }, resizingOptions, knownHash)
     if (image) {
       return image === true ? new NotModifiedResponse(knownHash) : image
     }
     throw new HttpNotFoundException()
   }
 
-  private async getGearAsset(
-    gear,
+  private async getEquipmentAsset(
+    equipment,
     resizingOptions: IImageResizingOptions | undefined,
     knownHash: string | undefined,
   ): Promise<IHashedImageEntity | NotModifiedResponse> {
-    if (!gear) {
+    if (!equipment) {
       throw new HttpNotFoundException()
     }
-    return this.findAssetImage(`icons/${gear.id}.png`, resizingOptions, knownHash)
+    return this.findAssetImage(`icons/${equipment.id}.png`, resizingOptions, knownHash)
   }
 
   private async findAssetImage(

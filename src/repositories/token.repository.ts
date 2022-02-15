@@ -16,6 +16,6 @@ export class TokenRepository {
   }
 
   async get(collectionId: number, tokenId: number) {
-    return this.providers[collectionId].get(tokenId)
+    return await this.providers[collectionId].get(tokenId)
   }
 }

@@ -3,7 +3,7 @@ import { readJsonFileSync } from '@utils/filesystem'
 import { Service } from 'typedi'
 import id from '../id'
 
-export interface IGear {
+export interface IEquipment {
   id: number
   collection: number
   code: string
@@ -28,24 +28,24 @@ export interface IGear {
 
 @Service()
 export class DataRepository extends AbstractDataRepository {
-  private gears: IGear[]
+  private equipments: IEquipment[]
 
   constructor() {
     super(id)
     this.loadData()
   }
 
-  findGearById(id: number): IGear | undefined {
-    return this.gears.find(item => item.id === id)
+  findEquipmentById(id: number): IEquipment | undefined {
+    return this.equipments.find(item => item.id === id)
   }
 
-  findGearByCode(code: string): IGear | undefined {
-    return this.gears.find(item => item.code === code)
+  findEquipmentByCode(code: string): IEquipment | undefined {
+    return this.equipments.find(item => item.code === code)
   }
 
-  findGearByTokenClassAndClassGearId(characterClass: number, classGearId: number): IGear | undefined {
-    const code = Number('0x' + characterClass.toString(16).padStart(2, '0') + classGearId.toString(16).padStart(2, '0')).toString()
-    return this.gears.find(item => item.code === code)
+  findEquipmentByTokenClassAndClassEquipmentId(characterClass: number, classEquipmentId: number): IEquipment | undefined {
+    const code = Number('0x' + characterClass.toString(16).padStart(2, '0') + classEquipmentId.toString(16).padStart(2, '0')).toString()
+    return this.equipments.find(item => item.code === code)
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -54,6 +54,6 @@ export class DataRepository extends AbstractDataRepository {
   }
 
   private loadData(): void {
-    this.gears = readJsonFileSync(this.resourceDataDir, 'gears.json')
+    this.equipments = readJsonFileSync(this.resourceDataDir, 'equipments.json')
   }
 }

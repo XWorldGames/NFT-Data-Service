@@ -16,12 +16,13 @@ export class MetadataController {
     this.imageUrlTemplate = config.get(`image.url`)
   }
 
-  @Get('/:collectionId([0-9]+)/:tokenId([0-9]+)')
-  async get(@Param('collectionId') collectionId: number, @Param('tokenId') tokenId: number): Promise<any> {
-    const metadata = await this.metadataService.findByTokenId(collectionId, tokenId)
+  @Get('/:collectionId([0-9]+)/:tokenId([0-9]+|[0-9a-f]{64})')
+  async get(@Param('collectionId') collectionId: number, @Param('tokenId') tokenId: string): Promise<any> {
+    const id = Number(tokenId.length === 64 ? `0x${tokenId}` : tokenId)
+    const metadata = await this.metadataService.findByTokenId(collectionId, id)
     if (metadata) {
       const data = metadata.value
-      const imageUrl = this.imageUrlTemplate[collectionId].replace('{collectionId}', `${collectionId}`).replace('{tokenId}', `${tokenId}`)
+      const imageUrl = this.imageUrlTemplate[collectionId].replace('{collectionId}', `${collectionId}`).replace('{tokenId}', `${id}`)
       return {
         name: data.name,
         description: data.description,

@@ -41,7 +41,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     const grade = Number(data.grade)
     const level = Number(data.level)
     const experience = Number(data.exp)
-    const star = level % 5
+    const star = level % 5 || 5
     const generation = Math.ceil(level / 5)
     const { properties } = equipment.graded.find(item => item.level === grade)
     const health = properties.health

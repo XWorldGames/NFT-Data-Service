@@ -24,10 +24,10 @@ https://metadata-dev.nft.xwg.games/
 
 #### Parameters
 
-| Name           | Description                                                                                                                                                                                                                                         |
-|:---------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `collectionId` | The collection ID of the token.<br/>- `1` DreamCard Cards<br/>- `2` DreamCard Equipments<br/>- `3` DreamCard Mystery Boxes of Equipment<br/>- `4` DreamCard Level Assets<br/>- `5` DreamCard Level Prizes<br/>- `6` DreamCard Equipment Consumables |
-| `tokenId`      | The ID of the token.<br/><br/>The ID of the Equipment Consumables:<br/>- `1` Equipment Essences                                                                                                                                                     |
+| Name           | Description                                                                                                                                                                                                                                                                                                            |
+|:---------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `collectionId` | The collection ID of the token.<br/>- `1` DreamCard Cards<br/>- `2` DreamCard Equipments<br/>- `3` DreamCard Mystery Boxes of Equipment<br/>- `4` DreamCard Level Assets<br/>- `5` DreamCard Level Prizes<br/>- `6` DreamCard Equipment Consumables<br/>- `7` DreamCard Talents<br/>- `8` DreamCard Talent Consumables |
+| `tokenId`      | The ID of the token.<br/><br/>The ID of the Equipment Consumables:<br/>- `1` Equipment Essences<br/><br/>The ID of the Talent Consumables:<br/>- `1` Talent Debris                                                                                                                                                     |
 
 #### Get a Token's Metadata
 
@@ -57,10 +57,10 @@ https://image-dev.nft.xwg.games/
 
 ##### Parameters
 
-| Name           | Description                                                                                                                                                                                                                                         |
-|:---------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `collectionId` | The collection ID of the token.<br/>- `1` DreamCard Cards<br/>- `2` DreamCard Equipments<br/>- `3` DreamCard Mystery Boxes of Equipment<br/>- `4` DreamCard Level Assets<br/>- `5` DreamCard Level Prizes<br/>- `6` DreamCard Equipment Consumables |
-| `tokenId`      | The ID of the token.<br/><br/>The ID of the Equipment Consumables:<br/>- `1` Equipment Essences                                                                                                                                                     |
+| Name           | Description                                                                                                                                                                                                                                                                                                            |
+|:---------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `collectionId` | The collection ID of the token.<br/>- `1` DreamCard Cards<br/>- `2` DreamCard Equipments<br/>- `3` DreamCard Mystery Boxes of Equipment<br/>- `4` DreamCard Level Assets<br/>- `5` DreamCard Level Prizes<br/>- `6` DreamCard Equipment Consumables<br/>- `7` DreamCard Talents<br/>- `8` DreamCard Talent Consumables |
+| `tokenId`      | The ID of the token.<br/><br/>The ID of the Equipment Consumables:<br/>- `1` Equipment Essences<br/><br/>The ID of the Talent Consumables:<br/>- `1` Talent Debris                                                                                                                                                     |
 
 ##### Get a Token's Image
 
@@ -130,12 +130,28 @@ https://image-dev.nft.xwg.games/
 /assets/2/tokens/{class}-{classEquipmentId}/{grade}
 ```
 
-##### Get a Equipment's Icon
+#### Talents Image Assets
+
+##### Parameters
+
+| Name         | Description                                                                                                |
+|:-------------|:-----------------------------------------------------------------------------------------------------------|
+| `talentId`   | The ID of talent generated by the NFTDS.                                                                   |
+| `talentCode` | The code of the talent. Which is the `tp` parameter in the contract.                                       |
+| `grade`      | The grade of the talent.<br/>- `1` Common<br/>- `2` Rare<br/>- `3` Epic<br/>- `4` Legendary<br/>- `5` Myth |
+
+##### Get a Token's Image with Base Stat
 
 ```
-/assets/2/equipments/icons/{equipmentId}
-/assets/2/equipments/icons/{equipmentCode}
-/assets/2/equipments/icons/{class}-{classEquipmentId}
+/assets/7/tokens/{talentId}/{grade}
+/assets/7/tokens/{talentCode}/{grade}
+```
+
+##### Get a Talent's Icon
+
+```
+/assets/7/talents/icons/{equipmentId}
+/assets/7/talents/icons/{equipmentCode}
 ```
 
 ### Image Resizing

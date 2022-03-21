@@ -17,6 +17,6 @@ export class TokenRepository {
   }
 
   async get(tokenId: number) {
-    return await this.contract.exists(tokenId)
+    return await this.contract.getNftData(tokenId)
   }
 }

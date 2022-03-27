@@ -24,10 +24,10 @@ https://metadata-dev.nft.xwg.games/
 
 #### Parameters
 
-| Name           | Description                                                                                                                                                                                                                                                                                                            |
-|:---------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `collectionId` | The collection ID of the token.<br/>- `1` DreamCard Cards<br/>- `2` DreamCard Equipments<br/>- `3` DreamCard Mystery Boxes of Equipment<br/>- `4` DreamCard Level Assets<br/>- `5` DreamCard Level Prizes<br/>- `6` DreamCard Equipment Consumables<br/>- `7` DreamCard Talents<br/>- `8` DreamCard Talent Consumables |
-| `tokenId`      | The ID of the token.<br/><br/>The ID of the Equipment Consumables:<br/>- `1` Equipment Essences<br/><br/>The ID of the Talent Consumables:<br/>- `1` Talent Debris                                                                                                                                                     |
+| Name           | Description                                                                                                                                                                                                                                                                                                                 |
+|:---------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `collectionId` | The collection ID of the token.<br/>- `1` DreamCard Characters<br/>- `2` DreamCard Equipments<br/>- `3` DreamCard Mystery Boxes of Equipment<br/>- `4` DreamCard Level Assets<br/>- `5` DreamCard Level Prizes<br/>- `6` DreamCard Equipment Consumables<br/>- `7` DreamCard Talents<br/>- `8` DreamCard Talent Consumables |
+| `tokenId`      | The ID of the token.<br/><br/>The ID of the DreamCard Equipment Consumables:<br/>- `1` DreamCard Equipment Essences<br/><br/>The ID of the DreamCard Talent Consumables:<br/>- `1` DreamCard Talent Debris                                                                                                                  |
 
 #### Get a Token's Metadata
 
@@ -57,10 +57,10 @@ https://image-dev.nft.xwg.games/
 
 ##### Parameters
 
-| Name           | Description                                                                                                                                                                                                                                                                                                            |
-|:---------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `collectionId` | The collection ID of the token.<br/>- `1` DreamCard Cards<br/>- `2` DreamCard Equipments<br/>- `3` DreamCard Mystery Boxes of Equipment<br/>- `4` DreamCard Level Assets<br/>- `5` DreamCard Level Prizes<br/>- `6` DreamCard Equipment Consumables<br/>- `7` DreamCard Talents<br/>- `8` DreamCard Talent Consumables |
-| `tokenId`      | The ID of the token.<br/><br/>The ID of the Equipment Consumables:<br/>- `1` Equipment Essences<br/><br/>The ID of the Talent Consumables:<br/>- `1` Talent Debris                                                                                                                                                     |
+| Name           | Description                                                                                                                                                                                                                                                                                                                 |
+|:---------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `collectionId` | The collection ID of the token.<br/>- `1` DreamCard Characters<br/>- `2` DreamCard Equipments<br/>- `3` DreamCard Mystery Boxes of Equipment<br/>- `4` DreamCard Level Assets<br/>- `5` DreamCard Level Prizes<br/>- `6` DreamCard Equipment Consumables<br/>- `7` DreamCard Talents<br/>- `8` DreamCard Talent Consumables |
+| `tokenId`      | The ID of the token.<br/><br/>The ID of the DreamCard Equipment Consumables:<br/>- `1` DreamCard Equipment Essences<br/><br/>The ID of the DreamCard Talent Consumables:<br/>- `1` DreamCard Talent Debris                                                                                                                  |
 
 ##### Get a Token's Image
 
@@ -68,7 +68,7 @@ https://image-dev.nft.xwg.games/
 /tokens/{collectionId}/{tokenId}
 ```
 
-#### Cards Image Assets
+#### Characters Image Assets
 
 ##### Parameters
 
@@ -188,3 +188,21 @@ The resource URL does not use any extension to explicitly indicate the image for
 - `jpeg`
 - `png`
 - `webp`
+
+## Database Service
+
+The database service provides queries for the game data such as characters, equipments, and skills. It is served through the graphql api, and you can read the documentation by visiting the links below.
+
+### Links
+
+#### Production
+
+```
+https://database.nft.xwg.games/
+```
+
+#### Development
+
+```
+https://database-dev.nft.xwg.games/
+```

@@ -100,6 +100,16 @@ export class AssetController extends AbstractAssetController {
     return this.getSkillAsset(skill, resizingOptions, knownHash)
   }
 
+  @Get('/skills/icons/2/:skillCode(SKL[0-9]+):resizing([.@][.0-9a-z_]+)?')
+  async getVersion2SkillAssetByCode(
+    @Param('skillCode') skillCode: string,
+    @ImageResizingParam('resizing') resizingOptions?: IImageResizingOptions,
+    @KnownHashParam() knownHash?: string,
+  ): Promise<IHashedImageEntity | NotModifiedResponse> {
+    const skill = this.dataRepository.findVersion2SkillByCode(skillCode)
+    return this.getSkillAsset(skill, resizingOptions, knownHash)
+  }
+
   private async getMockTokenImage(
     character,
     grade,

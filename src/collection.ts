@@ -2,6 +2,8 @@ const _imageControllers = []
 
 const _metadataControllers = []
 
+const _databaseGraphQLResolvers = []
+
 const _metadataNormalizers = {}
 
 const _dataRepositories = {}
@@ -14,6 +16,10 @@ export function registerImageControllers(controllers) {
 
 export function registerMetadataControllers(controllers) {
   controllers.forEach(controller => _metadataControllers.push(controller))
+}
+
+export function registerDatabaseGraphQLResolvers(resolvers) {
+  resolvers.forEach(resolver => _databaseGraphQLResolvers.push(resolver))
 }
 
 export function registerMetadataNormalizer(id, normalizer) {
@@ -46,4 +52,8 @@ export function getImageControllers() {
 
 export function getMetadataControllers() {
   return _metadataControllers
+}
+
+export function getDatabaseGraphQLResolvers() {
+  return _databaseGraphQLResolvers
 }

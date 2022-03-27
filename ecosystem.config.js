@@ -22,6 +22,7 @@ module.exports = {
       env: {
         IMAGE_PORT: 9001,
         METADATA_PORT: 9002,
+        DATABASE_PORT: 9003,
         NODE_ENV: 'production',
       },
     },

@@ -2,6 +2,7 @@ import { AbstractDataRepository } from '@/abstracts/abstract.data.repository'
 import { readJsonFileSync } from '@utils/filesystem'
 import { Service } from 'typedi'
 import id from '../id'
+import { ICompleteCharacter } from "@/collections/1/repositories/data.repository";
 
 export interface IEquipment {
   id: number
@@ -33,6 +34,17 @@ export class DataRepository extends AbstractDataRepository {
   constructor() {
     super(id)
     this.loadData()
+  }
+
+  findEquipments(query?: { match?: (value: any) => boolean; take?: number; skip?: number }): IEquipment[] {
+    const { match, skip, take } = query ?? {}
+    let equipments = this.equipments
+    if (match) {
+      equipments = equipments.filter(character => match(character))
+    }
+    const start = skip ?? 0
+    const end = Math.min((take ?? equipments.length) + start, equipments.length)
+    return equipments.slice(start, end)
   }
 
   findEquipmentById(id: number): IEquipment | undefined {

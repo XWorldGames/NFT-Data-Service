@@ -4,6 +4,7 @@ import { logger, stream } from '@utils/logger'
 import compression from 'compression'
 import config from 'config'
 import express from 'express'
+import { RequestHandlerParams } from 'express-serve-static-core'
 import helmet from 'helmet'
 import hpp from 'hpp'
 import morgan from 'morgan'
@@ -16,15 +17,15 @@ class App {
   public env: string
   public h2: boolean
 
-  constructor(Controllers: Function[], port: number, h2: boolean) {
+  constructor({ middlewares, controllers }: { middlewares?: Function[]; controllers?: Function[] }, port: number, h2: boolean) {
     this.app = express()
     this.port = port
     this.env = process.env.NODE_ENV || 'development'
     this.h2 = h2
     this.app.use(express.static(resolvePath('../public')))
 
-    this.initializeMiddlewares()
-    this.initializeRoutes(Controllers)
+    this.initializeMiddlewares(middlewares)
+    this.initializeRoutes(controllers)
     this.initializeErrorHandling()
   }
 
@@ -53,13 +54,32 @@ class App {
     return this.app
   }
 
-  private initializeMiddlewares() {
+  private initializeMiddlewares(middlewares: Function[]) {
     this.app.use(morgan(config.get('log.format'), { stream }))
     this.app.use(hpp())
-    this.app.use(helmet())
+    this.app.use(
+      helmet({
+        contentSecurityPolicy: {
+          directives: {
+            defaultSrc: ["'self'", "'unsafe-inline'"],
+            baseUri: ["'self'"],
+            blockAllMixedContent: [],
+            fontSrc: ["'self'", 'https:', 'data:'],
+            frameAncestors: ["'self'"],
+            imgSrc: ["'self'", 'data:'],
+            objectSrc: ["'none'"],
+            scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+            upgradeInsecureRequests: [],
+          },
+        },
+      }),
+    )
     this.app.use(compression())
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
+    if (Array.isArray(middlewares)) {
+      middlewares.forEach(middleware => this.app.use(middleware as RequestHandlerParams))
+    }
   }
 
   private initializeRoutes(controllers: Function[]) {

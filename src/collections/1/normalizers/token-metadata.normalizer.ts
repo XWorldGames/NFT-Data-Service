@@ -16,7 +16,7 @@ export interface ITokenMetadata extends ITokenMetadataBase {
     experience: number
     health: number
     attack: number
-    base_attack_time: number
+    attack_time: number
     win: number
     lose: number
     skills: { [k: string]: { identifier: number; name: string; level: number }[] }
@@ -87,7 +87,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         experience,
         health,
         attack,
-        base_attack_time: character.graded.find(item => item.level === grade).properties.base_attack_time,
+        attack_time: character.graded.find(item => item.level === grade).properties.base_attack_time,
         skills,
         win,
         lose,
@@ -131,7 +131,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         experience,
         health,
         attack,
-        base_attack_time: character.graded.find(item => item.level === grade).properties.base_attack_time,
+        attack_time: character.graded.find(item => item.level === grade).properties.base_attack_time,
         skills,
         win,
         lose,

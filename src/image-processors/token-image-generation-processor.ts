@@ -56,7 +56,6 @@ export class TokenImageGenerationProcessor {
   private cache: { [k: string]: ObjectiveBuffer } = {}
 
   async generate(collectionId: number, metadata: ITokenMetadata): Promise<IImageEntity> {
-    console.log(metadata)
     const { width, height, rules, elements } = this.dataRepository.getImageCompositionConfiguration(collectionId)
     if (metadata.special) {
       return await this.make(width, height, rules.special, elements, metadata)

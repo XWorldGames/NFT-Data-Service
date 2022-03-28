@@ -78,7 +78,7 @@ export class DataRepository extends AbstractDataRepository {
     this.loadData()
   }
 
-  findCharacters(query?: { match?: (value: any) => boolean; take?: number; skip?: number }): ICompleteCharacter[] {
+  findCompleteCharacters(query?: { match?: (value: any) => boolean; take?: number; skip?: number }): ICompleteCharacter[] {
     const { match, skip, take } = query ?? {}
     let characters = this.completeCharacters
     if (match) {
@@ -87,6 +87,10 @@ export class DataRepository extends AbstractDataRepository {
     const start = skip ?? 0
     const end = Math.min((take ?? characters.length) + start, characters.length)
     return characters.slice(start, end)
+  }
+
+  findCompleteCharacterById(id: number): ICompleteCharacter | undefined {
+    return this.completeCharacters.find(item => item.id === id)
   }
 
   findCharacterById(id: number): ICharacter | undefined {

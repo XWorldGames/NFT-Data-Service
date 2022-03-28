@@ -11,7 +11,7 @@ import { Character } from '../types'
 
 @InputType({ description: "The properties filter of the character's graded data." })
 class CharacterGradedPropertyFilter {
-  @Field(() => IntComparisonExpression, { nullable: true, description: "The attack time comparison expression of the character's graded data." })
+  @Field(() => IntComparisonExpression, { nullable: true, description: "The base attack time comparison expression of the character's graded data." })
   base_attack_time?: number
 }
 
@@ -94,7 +94,11 @@ export class CharacterResolver {
 
   @Query(() => Character, { description: 'Get a character by given ID.' })
   async character(@Arg('id', () => Int) id: number) {
-    return this.repository.findCharacterById(id)
+    const result = this.repository.findCompleteCharacterById(id)
+    if (!result) {
+      throw new Error('The resource cannot be found.')
+    }
+    return result
   }
 
   @Query(() => [Character], { description: 'Get characters by query statements.' })
@@ -103,11 +107,11 @@ export class CharacterResolver {
     if (filter) {
       try {
         const match = compileFilterInput(filter)
-        return this.repository.findCharacters({ match, take, skip })
+        return this.repository.findCompleteCharacters({ match, take, skip })
       } catch (_) {
         return []
       }
     }
-    return this.repository.findCharacters({ take, skip })
+    return this.repository.findCompleteCharacters({ take, skip })
   }
 }

@@ -39,7 +39,7 @@ export interface IBaseCharacter<Complete extends boolean> {
   graded: {
     level: number
     properties: {
-      attack_time: number
+      base_attack_time: number
     }
   }[]
 }

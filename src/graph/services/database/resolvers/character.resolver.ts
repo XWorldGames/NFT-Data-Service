@@ -12,7 +12,7 @@ import { Character } from '../types'
 @InputType({ description: "The properties filter of the character's graded data." })
 class CharacterGradedPropertyFilter {
   @Field(() => IntComparisonExpression, { nullable: true, description: "The attack time comparison expression of the character's graded data." })
-  attack_time?: number
+  base_attack_time?: number
 }
 
 @InputType({ description: 'The graded data filter of the character.' })

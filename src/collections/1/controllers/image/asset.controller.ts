@@ -157,7 +157,7 @@ export class AssetController extends AbstractAssetController {
     if (!skill) {
       throw new HttpNotFoundException()
     }
-    return await this.findAssetImage(`skills/${skill.version}/${skill.id}.jpg`, resizingOptions, knownHash)
+    return await this.findAssetImage(`skills/${skill.version}/${skill.id}.${skill.version === '1' ? 'jpg' : 'png'}`, resizingOptions, knownHash)
   }
 
   private async findAssetImage(

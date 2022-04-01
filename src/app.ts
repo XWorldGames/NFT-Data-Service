@@ -3,6 +3,7 @@ import { readFileSync, resolvePath } from '@utils/filesystem'
 import { logger, stream } from '@utils/logger'
 import compression from 'compression'
 import config from 'config'
+import cors from 'cors'
 import express from 'express'
 import { RequestHandlerParams } from 'express-serve-static-core'
 import helmet from 'helmet'
@@ -77,6 +78,7 @@ class App {
     this.app.use(compression())
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
+    this.app.use(cors())
     if (Array.isArray(middlewares)) {
       middlewares.forEach(middleware => this.app.use(middleware as RequestHandlerParams))
     }

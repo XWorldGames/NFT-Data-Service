@@ -66,7 +66,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         value: Grade[properties.grade],
       },
       {
-        display_type: 'boost_number',
+        display_type: 'number',
         trait_type: 'Dividend',
         value: properties.dividend,
       },

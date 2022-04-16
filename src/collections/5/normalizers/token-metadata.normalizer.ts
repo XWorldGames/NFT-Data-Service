@@ -50,12 +50,12 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         value: properties.level_pool_id,
       },
       {
-        display_type: 'boost_number',
+        display_type: 'number',
         trait_type: 'Level Round',
         value: properties.level_round,
       },
       {
-        display_type: 'boost_number',
+        display_type: 'number',
         trait_type: 'Winning Points',
         value: properties.winning_points,
       },

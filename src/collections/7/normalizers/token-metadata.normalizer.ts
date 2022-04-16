@@ -92,7 +92,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         value: TalentKind[properties.kind],
       },
       {
-        display_type: 'boost_number',
+        display_type: 'number',
         trait_type: 'Level',
         value: properties.level,
       },

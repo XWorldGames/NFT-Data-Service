@@ -141,12 +141,12 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         value: properties.experience,
       },
       {
-        display_type: 'boost_number',
+        display_type: 'number',
         trait_type: 'Health',
         value: properties.health,
       },
       {
-        display_type: 'boost_number',
+        display_type: 'number',
         trait_type: 'Attack',
         value: properties.attack,
       },

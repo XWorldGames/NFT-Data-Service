@@ -28,7 +28,7 @@ export class MetadataController {
         description: data.description,
         image: `${imageUrl}?${metadata.hash}`,
         external_url: 'https://xwg.games/',
-        properties: data['properties'] ?? {},
+        attributes: data['properties'] ?? {},
       }
     }
     throw new HttpNotFoundException()

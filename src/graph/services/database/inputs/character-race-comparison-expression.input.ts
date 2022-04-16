@@ -1,5 +1,5 @@
+import { CharacterRace } from '@/enums'
 import { Field, InputType } from 'type-graphql'
-import { CharacterRace } from '../enums'
 
 @InputType()
 export class CharacterRaceComparisonExpression {

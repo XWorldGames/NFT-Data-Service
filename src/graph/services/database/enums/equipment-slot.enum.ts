@@ -1,9 +1,5 @@
+import { EquipmentSlot } from '@/enums'
 import { registerEnumType } from 'type-graphql'
-
-export enum EquipmentSlot {
-  Weapon = 1,
-  Armor,
-}
 
 registerEnumType(EquipmentSlot, {
   name: 'EquipmentSlot',

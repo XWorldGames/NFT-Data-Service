@@ -1,3 +1,4 @@
+import { Grade, TalentKind } from '@/enums'
 import { ITokenMetadata as ITokenMetadataBase } from '@/interfaces/token-metadata.interface'
 import { ITokenMetadataNormalizer } from '@/interfaces/token-metadata.normalizer.interface'
 import { isEmpty } from '@utils/util'
@@ -5,18 +6,20 @@ import { Inject, Service } from 'typedi'
 import id from '../id'
 import { DataRepository } from '../repositories/data.repository'
 
+export interface ITokenMetadataProperties {
+  identifier: number
+  grade: number
+  kind: number
+  level: number
+  star: number
+  generation: number
+  experience: number
+}
+
 export interface ITokenMetadata extends ITokenMetadataBase {
   code: string
   name: string
-  properties: {
-    identifier: number
-    grade: number
-    kind: number
-    level: number
-    star: number
-    generation: number
-    experience: number
-  }
+  properties: ITokenMetadataProperties
 }
 
 @Service()
@@ -61,6 +64,44 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         experience,
       }
     })()
+  }
+
+  transformAttributes(properties: ITokenMetadataProperties) {
+    return [
+      {
+        display_type: 'number',
+        trait_type: 'Identifier',
+        value: properties.identifier,
+      },
+      {
+        trait_type: 'Grade',
+        value: Grade[properties.grade],
+      },
+      {
+        display_type: 'number',
+        trait_type: 'Generation',
+        value: properties.generation,
+      },
+      {
+        display_type: 'number',
+        trait_type: 'Star',
+        value: properties.star,
+      },
+      {
+        trait_type: 'Kind',
+        value: TalentKind[properties.kind],
+      },
+      {
+        display_type: 'boost_number',
+        trait_type: 'Level',
+        value: properties.level,
+      },
+      {
+        display_type: 'number',
+        trait_type: 'Experience',
+        value: properties.experience,
+      },
+    ]
   }
 
   mock(identifier: number, data: any): ITokenMetadata | null {

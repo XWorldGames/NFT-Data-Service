@@ -4,15 +4,18 @@ import { isEmpty } from '@utils/util'
 import { Inject, Service } from 'typedi'
 import id from '../id'
 import { DataRepository } from '../repositories/data.repository'
+import { Grade } from "@/enums";
+
+export interface ITokenMetadataProperties {
+  identifier: number
+  grade: number
+  dividend: number
+}
 
 export interface ITokenMetadata extends ITokenMetadataBase {
   code: string
   name: string
-  properties: {
-    identifier: number
-    grade: number
-    dividend: number
-  }
+  properties: ITokenMetadataProperties
 }
 
 @Service()
@@ -49,6 +52,25 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         dividend,
       }
     })()
+  }
+
+  transformAttributes(properties: ITokenMetadataProperties) {
+    return [
+      {
+        display_type: 'number',
+        trait_type: 'Identifier',
+        value: properties.identifier,
+      },
+      {
+        trait_type: 'Grade',
+        value: Grade[properties.grade],
+      },
+      {
+        display_type: 'boost_number',
+        trait_type: 'Dividend',
+        value: properties.dividend,
+      },
+    ]
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

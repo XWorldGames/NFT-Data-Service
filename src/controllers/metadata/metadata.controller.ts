@@ -28,7 +28,7 @@ export class MetadataController {
         description: data.description,
         image: `${imageUrl}?${metadata.hash}`,
         external_url: 'https://xwg.games/',
-        attributes: data['properties'] ?? {},
+        attributes: data['properties'] ? this.metadataService.transformAttributes(collectionId, data['properties']) : [],
       }
     }
     throw new HttpNotFoundException()

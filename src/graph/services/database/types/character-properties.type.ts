@@ -1,5 +1,5 @@
+import { CharacterClass, CharacterRace } from '@/enums'
 import { Field, Int, ObjectType } from 'type-graphql'
-import { CharacterClass, CharacterRace } from '../enums'
 import { CharacterPropertiesSkills } from './character-properties-skills.type'
 
 @ObjectType({ description: 'The properties of the character.' })

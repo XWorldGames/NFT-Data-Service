@@ -1,5 +1,5 @@
+import { Element } from '@/enums'
 import { Field, InputType } from 'type-graphql'
-import { Element } from '../enums'
 
 @InputType()
 export class ElementComparisonExpression {

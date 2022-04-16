@@ -4,10 +4,12 @@ import { isEmpty } from '@utils/util'
 import { Service } from 'typedi'
 import id from '../id'
 
+export interface ITokenMetadataProperties {
+  type: number
+}
+
 export interface ITokenMetadata extends ITokenMetadataBase {
-  properties: {
-    type: number
-  }
+  properties: ITokenMetadataProperties
 }
 
 @Service()
@@ -32,6 +34,16 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         type,
       }
     })()
+  }
+
+  transformAttributes(properties: ITokenMetadataProperties) {
+    return [
+      {
+        display_type: 'number',
+        trait_type: 'Type',
+        value: properties.type,
+      },
+    ]
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -1,5 +1,5 @@
+import { SkillType } from '@/enums'
 import { Field, InputType } from 'type-graphql'
-import { SkillType } from '../enums'
 
 @InputType()
 export class SkillTypeComparisonExpression {

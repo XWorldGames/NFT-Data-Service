@@ -1,5 +1,5 @@
 import { Field, ObjectType } from 'type-graphql'
-import { CharacterClass, EquipmentSlot } from '../enums'
+import { CharacterClass, EquipmentSlot } from '@/enums'
 
 @ObjectType({ description: 'The properties of the equipment.' })
 export class EquipmentProperties {

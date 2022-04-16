@@ -4,12 +4,14 @@ import { isEmpty } from '@utils/util'
 import { Service } from 'typedi'
 import id from '../id'
 
+export interface ITokenMetadataProperties {
+  level_pool_id: number
+  level_round: number
+  winning_points: number
+}
+
 export interface ITokenMetadata extends ITokenMetadataBase {
-  properties: {
-    level_pool_id: number
-    level_round: number
-    winning_points: number
-  }
+  properties: ITokenMetadataProperties
 }
 
 @Service()
@@ -38,6 +40,26 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         winning_points: winningPoints,
       }
     })()
+  }
+
+  transformAttributes(properties: ITokenMetadataProperties) {
+    return [
+      {
+        display_type: 'number',
+        trait_type: 'Level Pool ID',
+        value: properties.level_pool_id,
+      },
+      {
+        display_type: 'boost_number',
+        trait_type: 'Level Round',
+        value: properties.level_round,
+      },
+      {
+        display_type: 'boost_number',
+        trait_type: 'Winning Points',
+        value: properties.winning_points,
+      },
+    ]
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

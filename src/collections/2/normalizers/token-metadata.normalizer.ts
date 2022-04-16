@@ -1,3 +1,4 @@
+import { CharacterClass, EquipmentSlot, Grade } from '@/enums'
 import { ITokenMetadata as ITokenMetadataBase } from '@/interfaces/token-metadata.interface'
 import { ITokenMetadataNormalizer } from '@/interfaces/token-metadata.normalizer.interface'
 import { isEmpty } from '@utils/util'
@@ -5,22 +6,24 @@ import { Inject, Service } from 'typedi'
 import id from '../id'
 import { DataRepository } from '../repositories/data.repository'
 
+export interface ITokenMetadataProperties {
+  identifier: number
+  grade: number
+  class: number
+  slot: number
+  level: number
+  star: number
+  generation: number
+  experience: number
+  health: number
+  attack: number
+  defense: number
+}
+
 export interface ITokenMetadata extends ITokenMetadataBase {
   code: string
   name: string
-  properties: {
-    identifier: number
-    grade: number
-    class: number
-    slot: number
-    level: number
-    star: number
-    generation: number
-    experience: number
-    health: number
-    attack: number
-    defense: number
-  }
+  properties: ITokenMetadataProperties
 }
 
 @Service()
@@ -74,6 +77,63 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         defense,
       }
     })()
+  }
+
+  transformAttributes(properties: ITokenMetadataProperties) {
+    return [
+      {
+        display_type: 'number',
+        trait_type: 'Identifier',
+        value: properties.identifier,
+      },
+      {
+        trait_type: 'Grade',
+        value: Grade[properties.grade],
+      },
+      {
+        display_type: 'number',
+        trait_type: 'Generation',
+        value: properties.generation,
+      },
+      {
+        display_type: 'number',
+        trait_type: 'Star',
+        value: properties.star,
+      },
+      {
+        trait_type: 'Class',
+        value: CharacterClass[properties.class],
+      },
+      {
+        trait_type: 'Slot',
+        value: EquipmentSlot[properties.slot],
+      },
+      {
+        display_type: 'number',
+        trait_type: 'Level',
+        value: properties.level,
+      },
+      {
+        display_type: 'number',
+        trait_type: 'Experience',
+        value: properties.experience,
+      },
+      {
+        display_type: 'boost_number',
+        trait_type: 'Health',
+        value: properties.health,
+      },
+      {
+        display_type: 'boost_number',
+        trait_type: 'Attack',
+        value: properties.attack,
+      },
+      {
+        display_type: 'boost_number',
+        trait_type: 'Defense',
+        value: properties.defense,
+      },
+    ]
   }
 
   mock(identifier: number, data: any): ITokenMetadata | null {

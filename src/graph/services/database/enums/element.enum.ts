@@ -1,13 +1,5 @@
+import { Element } from '@/enums'
 import { registerEnumType } from 'type-graphql'
-
-export enum Element {
-  None,
-  Metal,
-  Wood,
-  Water,
-  Fire,
-  Earth,
-}
 
 registerEnumType(Element, {
   name: 'Element',

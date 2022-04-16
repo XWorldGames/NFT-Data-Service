@@ -1,3 +1,4 @@
+import { CharacterClass, CharacterRace, Element, Grade, TalentKind } from "@/enums";
 import { ITokenMetadata as ITokenMetadataBase } from '@/interfaces/token-metadata.interface'
 import { ITokenMetadataNormalizer } from '@/interfaces/token-metadata.normalizer.interface'
 import { isEmpty } from '@utils/util'
@@ -5,22 +6,26 @@ import { Inject, Service } from 'typedi'
 import id from '../id'
 import { DataRepository } from '../repositories/data.repository'
 
+export interface ITokenMetadataProperties {
+  identifier: number
+  grade: number
+  star: number
+  generation: number
+  class: number
+  race: number
+  element: number
+  experience: number
+  health: number
+  attack: number
+  base_attack_time: number
+  win: number
+  lose: number
+  skills: { [k: string]: { identifier: number; name: string; level: number }[] }
+}
+
 export interface ITokenMetadata extends ITokenMetadataBase {
   code: string
-  properties: {
-    identifier: number
-    grade: number
-    star: number
-    generation: number
-    element: number
-    experience: number
-    health: number
-    attack: number
-    base_attack_time: number
-    win: number
-    lose: number
-    skills: { [k: string]: { identifier: number; name: string; level: number }[] }
-  }
+  properties: ITokenMetadataProperties
 }
 
 @Service()
@@ -83,6 +88,8 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         grade,
         star,
         generation,
+        class: character.properties.class,
+        race: character.properties.race,
         element,
         experience,
         health,
@@ -93,6 +100,66 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         lose,
       }
     })()
+  }
+
+  transformAttributes(properties: ITokenMetadataProperties) {
+    return [
+      {
+        display_type: 'number',
+        trait_type: 'Identifier',
+        value: properties.identifier,
+      },
+      {
+        trait_type: 'Grade',
+        value: Grade[properties.grade],
+      },
+      {
+        display_type: 'number',
+        trait_type: 'Generation',
+        value: properties.generation,
+      },
+      {
+        display_type: 'number',
+        trait_type: 'Star',
+        value: properties.star,
+      },
+      {
+        trait_type: 'Class',
+        value: CharacterClass[properties.class],
+      },
+      {
+        trait_type: 'Race',
+        value: CharacterRace[properties.race],
+      },
+      {
+        trait_type: 'Element',
+        value: Element[properties.element],
+      },
+      {
+        display_type: 'number',
+        trait_type: 'Experience',
+        value: properties.experience,
+      },
+      {
+        display_type: 'boost_number',
+        trait_type: 'Health',
+        value: properties.health,
+      },
+      {
+        display_type: 'boost_number',
+        trait_type: 'Attack',
+        value: properties.attack,
+      },
+      {
+        display_type: 'number',
+        trait_type: 'Base Attack Time',
+        value: properties.base_attack_time,
+      },
+      {
+        trait_type: 'Skills',
+        value: properties.skills,
+      },
+    ]
   }
 
   mock(identifier: number, data: any): ITokenMetadata {
@@ -127,6 +194,8 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         grade,
         star,
         generation,
+        class: character.properties.class,
+        race: character.properties.race,
         element,
         experience,
         health,

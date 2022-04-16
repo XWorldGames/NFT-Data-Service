@@ -35,6 +35,10 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     })()
   }
 
+  transformAttributes(properties) {
+    return []
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   mock(identifier: number, data: any): ITokenMetadata | null {
     throw new Error('unsupported')

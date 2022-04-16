@@ -1,5 +1,5 @@
+import { EquipmentSlot } from '@/enums'
 import { Field, InputType } from 'type-graphql'
-import { EquipmentSlot } from '../enums'
 
 @InputType()
 export class EquipmentSlotComparisonExpression {

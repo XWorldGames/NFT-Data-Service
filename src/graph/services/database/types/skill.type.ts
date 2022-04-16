@@ -1,5 +1,5 @@
+import { SkillType } from '@/enums'
 import { Field, Int, ObjectType } from 'type-graphql'
-import { SkillType } from '../enums'
 import { SkillEffect } from './skill-effect.type'
 
 @ObjectType({ description: 'The skill details of the character.' })

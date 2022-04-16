@@ -1,12 +1,5 @@
+import { CharacterClass } from '@/enums'
 import { registerEnumType } from 'type-graphql'
-
-export enum CharacterClass {
-  Knight = 1,
-  Assassin,
-  Archer,
-  Mage,
-  Priest,
-}
 
 registerEnumType(CharacterClass, {
   name: 'CharacterClass',

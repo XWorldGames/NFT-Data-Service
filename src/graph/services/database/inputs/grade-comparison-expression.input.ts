@@ -1,5 +1,5 @@
+import { Grade } from '@/enums'
 import { Field, InputType } from 'type-graphql'
-import { Grade } from '../enums'
 
 @InputType()
 export class GradeComparisonExpression {

@@ -16,6 +16,7 @@ export class MetadataController {
     this.imageUrlTemplate = config.get(`image.url`)
   }
 
+  @Get('/%7Bid%7D:collectionId([0-9]+)/:tokenId([0-9]+|[0-9a-f]{64})')
   @Get('/:collectionId([0-9]+)/:tokenId([0-9]+|[0-9a-f]{64})')
   async get(@Param('collectionId') collectionId: number, @Param('tokenId') tokenId: string): Promise<any> {
     const id = Number(tokenId.length === 64 ? `0x${tokenId}` : tokenId)

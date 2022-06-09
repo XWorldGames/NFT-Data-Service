@@ -45,13 +45,21 @@ export abstract class AbstractDataRepository {
     this.imageCompositionConfiguration = readJsonFileSync(resolvePath(this.resourceDataDir, 'image-composition.json'))
     for (const k in this.imageCompositionConfiguration.elements) {
       const resource = this.imageCompositionConfiguration.elements[k].resource
-      resource.path = resolvePath(this.resourceImageDir, resource.path)
+      resource.path = this.resolveResourcePath(resource.path)
       if (resource.framesPath) {
-        resource.framesPath = resolvePath(this.resourceImageDir, resource.framesPath)
+        resource.framesPath = this.resolveResourcePath(resource.framesPath)
       }
       if (this.imageCompositionConfiguration.elements[k].when) {
         this.imageCompositionConfiguration.elements[k].when = compileFilterQuery(this.imageCompositionConfiguration.elements[k].when)
       }
     }
+  }
+
+  private resolveResourcePath(path: string) {
+    if (path.startsWith('/')) {
+      const [, collectionId, resourcePath] = path.match(/^\/(\d+)\/(.+)/i)
+      return resolvePath(resolvePath(config.get('resource.dir'), String(collectionId), 'images'), resourcePath)
+    }
+    return resolvePath(this.resourceImageDir, path)
   }
 }

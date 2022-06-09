@@ -1,4 +1,5 @@
 import '@/collections/1'
+import '@/collections/10'
 import '@/collections/2'
 import '@/collections/3'
 import '@/collections/4'

@@ -1,4 +1,4 @@
-import { CharacterClass, CharacterRace, Element, Grade, TalentKind } from "@/enums";
+import { CharacterClass, CharacterRace, Element, Grade} from "@/enums"
 import { ITokenMetadata as ITokenMetadataBase } from '@/interfaces/token-metadata.interface'
 import { ITokenMetadataNormalizer } from '@/interfaces/token-metadata.normalizer.interface'
 import { isEmpty } from '@utils/util'

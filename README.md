@@ -4,6 +4,13 @@
 
 The NFTDS (NFT Data Service) is a service that provides unified access to data resources for all X World Games NFT products. You can get all public data resources through this service.
 
+## URL Template Parameters
+
+| Name           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|:---------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `collectionId` | The collection ID of the token.<br/>- `1` DreamCard Characters<br/>- `2` DreamCard Equipments<br/>- `3` DreamCard Mystery Boxes of Equipment<br/>- `4` DreamCard Level Assets<br/>- `5` DreamCard Level Prizes<br/>- `6` DreamCard Equipment Consumables<br/>- `7` DreamCard Talents<br/>- `8` DreamCard Talent Consumables<br/>- `9` DreamCard Lucid<br/>- `10` DreamCard Character Pieces<br/>- `11` HeroCard Characters<br/>- `12` HeroCard Bills<br/>- `13` Dreamidols DJ                                                                                                                                                           |
+| `tokenId`      | The ID of the token.<br/><br/>The ID of the DreamCard Equipment Consumables:<br/>- `1` DreamCard Equipment Essences<br/><br/>The ID of the DreamCard Talent Consumables:<br/>- `1` DreamCard Talent Debris<br/><br/>The ID of the DreamCard Lucid:<br/>- `769` DreamCard Lucid Basic<br/>- `515` DreamCard Lucid Magic<br/>- `516` DreamCard Lucid Super<br/><br/>The ID of the DreamCard Character Pieces:<br/>`tokenId = characterNum &#124; element << 16 &#124; grade << 24`<br/><br/>The ID of the HeroCard Bills:<br/>`1` HeroCard Bill<br/><br/>The ID of the Dreamidols DJ:<br/>- `1` Dreamidols Dream<br/>- `2` Dreamidols Joy |
+
 ## Metadata Service
 
 ### Hosts
@@ -21,13 +28,6 @@ https://metadata-dev.nft.xwg.games/
 ```
 
 ### URL Templates
-
-#### Parameters
-
-| Name           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-|:---------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `collectionId` | The collection ID of the token.<br/>- `1` DreamCard Characters<br/>- `2` DreamCard Equipments<br/>- `3` DreamCard Mystery Boxes of Equipment<br/>- `4` DreamCard Level Assets<br/>- `5` DreamCard Level Prizes<br/>- `6` DreamCard Equipment Consumables<br/>- `7` DreamCard Talents<br/>- `8` DreamCard Talent Consumables<br/>- `9` DreamCard Lucid<br/>- `10` DreamCard Character Pieces<br/>- `11` HeroCard Characters<br/>- `12` HeroCard Bills                                                                            |
-| `tokenId`      | The ID of the token.<br/><br/>The ID of the DreamCard Equipment Consumables:<br/>- `1` DreamCard Equipment Essences<br/><br/>The ID of the DreamCard Talent Consumables:<br/>- `1` DreamCard Talent Debris<br/><br/>The ID of the DreamCard Lucid:<br/>- `769` DreamCard Lucid Basic<br/>- `515` DreamCard Lucid Magic<br/>- `516` DreamCard Lucid Super<br/><br/>The ID of the DreamCard Character Pieces:<br/>`tokenId = characterNum &#124; element << 16 &#124; grade << 24`<br/><br/>The ID of the HeroCard Bills:<br/>`1` |
 
 #### Get a Token's Metadata
 
@@ -54,13 +54,6 @@ https://image-dev.nft.xwg.games/
 ### URL Templates
 
 #### NFT Images
-
-##### Parameters
-
-| Name           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-|:---------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `collectionId` | The collection ID of the token.<br/>- `1` DreamCard Characters<br/>- `2` DreamCard Equipments<br/>- `3` DreamCard Mystery Boxes of Equipment<br/>- `4` DreamCard Level Assets<br/>- `5` DreamCard Level Prizes<br/>- `6` DreamCard Equipment Consumables<br/>- `7` DreamCard Talents<br/>- `8` DreamCard Talent Consumables<br/>- `9` DreamCard Lucid<br/>- `10` DreamCard Character Pieces<br/>- `11` HeroCard Characters<br/>- `12` HeroCard Bills                                                                            |
-| `tokenId`      | The ID of the token.<br/><br/>The ID of the DreamCard Equipment Consumables:<br/>- `1` DreamCard Equipment Essences<br/><br/>The ID of the DreamCard Talent Consumables:<br/>- `1` DreamCard Talent Debris<br/><br/>The ID of the DreamCard Lucid:<br/>- `769` DreamCard Lucid Basic<br/>- `515` DreamCard Lucid Magic<br/>- `516` DreamCard Lucid Super<br/><br/>The ID of the DreamCard Character Pieces:<br/>`tokenId = characterNum &#124; element << 16 &#124; grade << 24`<br/><br/>The ID of the HeroCard Bills:<br/>`1` |
 
 ##### Get a Token's Image
 

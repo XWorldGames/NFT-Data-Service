@@ -29,7 +29,8 @@
     "9": "0x93a1c932f2dEc6A3CA55A8b3eDd5D541958BD156",
     "10": "0x1Cd0eC0dF47f11E23f2C24300720aDf9dD596A62",
     "11": "0x0D0E947c37a5ae66C33Ff3bA28FE8f791503622B",
-    "12": "0xC273D9EE20F569614E8Ba234851825ef39026a56"
+    "12": "0xC273D9EE20F569614E8Ba234851825ef39026a56",
+    "13": ""
   },
   "image": {
     "url": {
@@ -44,7 +45,8 @@
       "9": "https://image.nft.xwg.games/tokens/{collectionId}/{tokenId}",
       "10": "https://image.nft.xwg.games/tokens/{collectionId}/{tokenId}",
       "11": "https://image.nft.xwg.games/tokens/{collectionId}/{tokenId}",
-      "12": "https://image.nft.xwg.games/tokens/{collectionId}/{tokenId}"
+      "12": "https://image.nft.xwg.games/tokens/{collectionId}/{tokenId}",
+      "13": "https://image.nft.xwg.games/tokens/{collectionId}/{tokenId}"
     }
   }
 }

@@ -78,7 +78,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
       collection_id = id
       identifier = character.id
       code = character.code
-      name = character.name
+      name = `${character.name} #${tokenId}`
       description = character.description
       event = character.event
       special = character.special

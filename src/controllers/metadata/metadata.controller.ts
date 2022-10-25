@@ -25,13 +25,22 @@ export class MetadataController {
     if (metadata) {
       const data = metadata.value
       const imageUrl = this.imageUrlTemplate[collectionId].replace('{collectionId}', `${collectionId}`).replace('{tokenId}', `${id}`)
-      return {
+      const result = {
         name: data.name,
         description: data.description,
         image: `${imageUrl}?${metadata.hash}`,
         external_url: 'https://xwg.games/',
-        attributes: data['properties'] ? this.metadataService.transformAttributes(collectionId, data['properties']) : [],
+        attributes: [],
       }
+
+      if (data['properties']) {
+        if (data['properties']['media_url']) {
+          result['animation_url'] = data['properties']['media_url']
+        }
+        result.attributes = this.metadataService.transformAttributes(collectionId, data['properties'])
+      }
+
+      return result
     }
     throw new HttpNotFoundException()
   }

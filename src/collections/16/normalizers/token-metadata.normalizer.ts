@@ -1,13 +1,16 @@
+import { Grade } from '@/enums'
 import { ITokenMetadata as ITokenMetadataBase } from '@/interfaces/token-metadata.interface'
 import { ITokenMetadataNormalizer } from '@/interfaces/token-metadata.normalizer.interface'
 import { isEmpty } from '@utils/util'
-import { Service } from 'typedi'
+import { Inject, Service } from 'typedi'
 import id from '../id'
+import { DataRepository } from '../repositories/data.repository'
 
 export interface ITokenMetadataProperties {
-  level_pool_id: number
-  level_round: number
-  winning_points: number
+  type: number
+  id: number
+  character: number
+  grade: number
 }
 
 export interface ITokenMetadata extends ITokenMetadataBase {
@@ -16,28 +19,34 @@ export interface ITokenMetadata extends ITokenMetadataBase {
 
 @Service()
 export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
+  @Inject()
+  private readonly dataRepository: DataRepository
+
   normalize(tokenId: number, data: any): ITokenMetadata | null {
     if (isEmpty(data)) {
       return null
     }
 
-    const levelPoolId = Number(data.NFTType)
-    const levelRound = Number(data.NFTFixedData)
-    const winningPoints = Number(data.NFTTypeID)
+    const result = this.dataRepository.findById(tokenId)
+    if (!result) {
+      return null
+    }
 
     return new (class implements ITokenMetadata {
       id = Number(tokenId)
+      identifier = result.id
       collection_id = id
-      identifier = null
-      name = `Level Prize #${tokenId}`
-      description = ''
+      name = `${result.name} ${Grade[result.properties.grade]}`
+      description = result.description
       event = null
       special = false
       animated = false
       properties = {
-        level_pool_id: levelPoolId,
-        level_round: levelRound,
-        winning_points: winningPoints,
+        identifier: result.id,
+        type: result.properties.type,
+        id: result.properties.id,
+        character: result.properties.character,
+        grade: result.properties.grade,
       }
     })()
   }
@@ -46,24 +55,27 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     return [
       {
         display_type: 'number',
-        trait_type: 'Level Pool ID',
-        value: properties.level_pool_id,
+        trait_type: 'ID',
+        value: properties.id,
       },
       {
         display_type: 'number',
-        trait_type: 'Level Round',
-        value: properties.level_round,
+        trait_type: 'Character',
+        value: properties.character,
       },
       {
         display_type: 'number',
-        trait_type: 'Winning Points',
-        value: properties.winning_points,
+        trait_type: 'Type',
+        value: properties.type,
+      },
+      {
+        trait_type: 'Grade',
+        value: Grade[properties.grade],
       },
     ]
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  mock(identifier: number, data: any): ITokenMetadata | null {
-    throw new Error('unsupported')
+  mock(identifier: number, data: any): ITokenMetadata {
+    return null
   }
 }

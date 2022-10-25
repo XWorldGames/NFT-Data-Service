@@ -49,7 +49,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
       collection_id = id
       identifier = talent.id
       code = talent.code
-      name = talent.name
+      name = `${talent.name} #${tokenId}`
       description = talent.description
       event = talent.event
       special = talent.special

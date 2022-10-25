@@ -75,7 +75,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         collection_id = id
         identifier = result.id
         code = result.code
-        name = `${result.name} ${Grade[grade]} #${tokenId}`
+        name = `${result.name} ${Grade[grade]}`
         description = result.description
         event = result.event
         special = result.special
@@ -106,7 +106,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         collection_id = id
         identifier = result.id
         code = result.code
-        name = `${result.name} ${Grade[grade]} #${tokenId}`
+        name = `${result.name} ${Grade[grade]}`
         description = result.description
         event = result.event
         special = result.special

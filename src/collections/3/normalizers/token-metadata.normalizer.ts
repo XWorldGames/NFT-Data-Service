@@ -25,7 +25,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
       id = Number(tokenId)
       collection_id = id
       identifier = type
-      name = `Mystery Box of Equipment #${tokenId}`
+      name = `Mystery Box of Equipment`
       description = ''
       event = null
       special = false

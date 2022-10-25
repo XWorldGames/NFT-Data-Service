@@ -29,7 +29,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
       id = Number(tokenId)
       collection_id = id
       identifier = null
-      name = `Level Prize #${tokenId}`
+      name = `Level Prize`
       description = ''
       event = null
       special = false

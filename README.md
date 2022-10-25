@@ -1,4 +1,4 @@
-# X World Games NFTDS
+# X World Games NFT Data Service
 
 ## Introduction
 

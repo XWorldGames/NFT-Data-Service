@@ -89,6 +89,7 @@ export interface IImageCompositionRule {
 }
 
 export interface IImageCompositionConfiguration {
+  version: number
   width: number
   height: number
   rules: IImageCompositionRuleSet

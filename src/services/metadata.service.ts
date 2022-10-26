@@ -2,6 +2,7 @@ import { getMetadataNormalizers } from '@/collection'
 import { IMetadataEntity, MetadataEntity } from '@/entities/metadata.entity'
 import { TokenRepository } from '@/repositories/token.repository'
 import { ITokenMetadataNormalizer } from '@interfaces/token-metadata.normalizer.interface'
+import { DataRepository } from '@repositories/data.repository'
 import { MetadataRepository } from '@repositories/metadata.repository'
 import { logger } from '@utils/logger'
 import objectHash from 'object-hash'
@@ -14,6 +15,9 @@ export class MetadataService {
 
   @Inject()
   private readonly tokenRepository: TokenRepository
+
+  @Inject()
+  private readonly dataRepository: DataRepository
 
   private readonly normalizers: { [k: string]: ITokenMetadataNormalizer }
 
@@ -35,6 +39,7 @@ export class MetadataService {
       const data = await this.tokenRepository.get(collectionId, tokenId)
       if (data !== undefined && data !== null) {
         token = this.normalizers[collectionId].normalize(tokenId, data)
+        token['iccv'] = this.dataRepository.getImageCompositionConfiguration(collectionId).version
       }
     } catch (error) {
       if (error.code !== 'CALL_EXCEPTION') {

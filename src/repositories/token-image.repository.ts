@@ -15,7 +15,7 @@ export class TokenImageRepository {
     this.db = level(ensurePath(config.get('db.dir'), 'token.image'), { valueEncoding: 'binary' })
   }
 
-  resolveKey(collectionId: number, tokenId: number) {
+  resolveKey(collectionId: number, tokenId: string) {
     return `${collectionId}:${tokenId}`
   }
 

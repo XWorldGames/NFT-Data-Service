@@ -1,5 +1,5 @@
 export interface ITokenMetadata {
-  id: number
+  id: any
   name: string
   description: string
   collection_id: number

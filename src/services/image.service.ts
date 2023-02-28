@@ -56,6 +56,7 @@ export class ImageService {
     } else {
       image = await this.getTokenImageByMetadata(metadata)
     }
+    console.log("image = "+image)
     return image
   }
 

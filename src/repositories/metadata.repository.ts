@@ -12,7 +12,7 @@ export class MetadataRepository {
     this.db = level(ensurePath(config.get('db.dir'), 'metadata'), { valueEncoding: 'json' })
   }
 
-  resolveKey(tokenCollectionId: number, tokenId: number) {
+  resolveKey(tokenCollectionId: number, tokenId: string) {
     return `${tokenCollectionId}:${tokenId}`
   }
 

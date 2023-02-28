@@ -8,7 +8,7 @@ import { DataRepository } from '../repositories/data.repository'
 
 export interface ITokenMetadataProperties {
   showType: number
-  id: number
+  id: string
   character: number
   seat: number
   seatType: number
@@ -24,13 +24,13 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
   @Inject()
   private readonly dataRepository: DataRepository
 
-  normalize(tokenId: number, data: any): ITokenMetadata | null {
+  normalize(tokenId: string, data: any): ITokenMetadata | null {
     if (isEmpty(data)) {
       return null
     }
 
     const result = this.dataRepository.findById(tokenId)
-    console.log("result = "+result)
+    console.log("result = " + result)
     if (!result) {
       return null
     }

@@ -4,7 +4,7 @@ import { Service } from 'typedi'
 import id from '../id'
 
 export interface IBaseDatum {
-  id: number
+  id: string
   collection: number
   name: string
   description: string
@@ -28,9 +28,9 @@ export class DataRepository extends AbstractDataRepository {
     this.loadData()
   }
 
-  findById(id: number): IDatum | undefined {
-    console.log("find by id = "+id)
-    return this.data.find(item => item.id === id)
+  findById(id: string): IDatum | undefined {
+    console.log("find by id = " + id)
+    return this.data.find(item => id.indexOf(item.id) == 0)
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

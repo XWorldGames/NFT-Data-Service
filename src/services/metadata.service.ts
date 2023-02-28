@@ -31,7 +31,7 @@ export class MetadataService {
     return this.normalizers[collectionId].transformAttributes(properties)
   }
 
-  async findByTokenId(collectionId: number, tokenId: number): Promise<IMetadataEntity | null> {
+  async findByTokenId(collectionId: number, tokenId: string): Promise<IMetadataEntity | null> {
     const key = this.metadataRepository.resolveKey(collectionId, tokenId)
     let metadata = await this.metadataRepository.get(key)
     let token

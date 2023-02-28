@@ -29,7 +29,6 @@ export class DataRepository extends AbstractDataRepository {
   }
 
   findById(id: string): IDatum | undefined {
-    console.log("find by id = " + id)
     return this.data.find(item => id.indexOf(item.id) == 0)
   }
 

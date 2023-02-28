@@ -48,7 +48,6 @@ export class MetadataService {
         return metadata || null
       }
     }
-    console.log("token = "+token)
     if (token) {
       const hash = objectHash(token)
       if (!metadata || hash !== metadata.hash) {

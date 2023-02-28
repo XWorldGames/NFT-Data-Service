@@ -30,7 +30,6 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     }
 
     const result = this.dataRepository.findById(tokenId)
-    console.log("result = " + result)
     if (!result) {
       return null
     }

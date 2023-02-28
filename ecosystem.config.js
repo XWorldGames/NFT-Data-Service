@@ -32,7 +32,7 @@ module.exports = {
       args: '-r tsconfig-paths/register --transpile-only src/server.ts', // ts-node args
       exec_mode: 'cluster', // 'cluster' or 'fork'
       instance_var: 'INSTANCE_ID', // instance variable
-      instances: 2, // pm2 instance count
+      instances: 1, // pm2 instance count
       autorestart: true, // auto restart if process crash
       watch: false, // files change automatic restart
       ignore_watch: ['node_modules', 'logs'], // ignore files change
@@ -42,7 +42,9 @@ module.exports = {
       error: './logs/error.log', // pm2 error log file
       env: {
         // environment variable
-        PORT: 3000,
+        IMAGE_PORT: 9001,
+        METADATA_PORT: 9002,
+        DATABASE_PORT: 9003,
         NODE_ENV: 'development',
       },
     },

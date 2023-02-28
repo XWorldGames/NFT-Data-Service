@@ -35,7 +35,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     }
 
     return new (class implements ITokenMetadata {
-      id = Number(tokenId)
+      id = tokenId
       identifier = result.id
       collection_id = id
       name = `${result.name}`

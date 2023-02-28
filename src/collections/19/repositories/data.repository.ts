@@ -29,6 +29,7 @@ export class DataRepository extends AbstractDataRepository {
   }
 
   findById(id: number): IDatum | undefined {
+    console.log("find by id = "+id)
     return this.data.find(item => item.id === id)
   }
 

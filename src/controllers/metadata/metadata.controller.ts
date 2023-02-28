@@ -21,6 +21,8 @@ export class MetadataController {
   @Get('/:collectionId([0-9]+)/:tokenId([0-9]+|[0-9a-f]{64})')
   async get(@Param('collectionId') collectionId: number, @Param('tokenId') tokenId: string): Promise<any> {
     const id = Number(tokenId.length === 64 ? `0x${tokenId}` : tokenId)
+    // const id = tokenId;
+    console.log("id = "+id)
     const metadata = await this.metadataService.findByTokenId(collectionId, id)
     console.log(metadata)
     if (metadata) {

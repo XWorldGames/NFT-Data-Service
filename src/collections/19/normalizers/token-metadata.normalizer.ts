@@ -7,10 +7,12 @@ import id from '../id'
 import { DataRepository } from '../repositories/data.repository'
 
 export interface ITokenMetadataProperties {
-  type: number
+  showType: number
   id: number
   character: number
-  grade: number
+  seat: number
+  seatType: number
+  round: number
 }
 
 export interface ITokenMetadata extends ITokenMetadataBase {
@@ -28,6 +30,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     }
 
     const result = this.dataRepository.findById(tokenId)
+    console.log("result = "+result)
     if (!result) {
       return null
     }
@@ -36,17 +39,18 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
       id = Number(tokenId)
       identifier = result.id
       collection_id = id
-      name = `${result.name} ${Grade[result.properties.grade]}`
+      name = `${result.name}`
       description = result.description
       event = null
       special = false
       animated = false
       properties = {
         identifier: result.id,
-        type: result.properties.type,
-        id: result.properties.id,
+        showType: result.properties.showType,
         character: result.properties.character,
-        grade: result.properties.grade,
+        seat: result.properties.seat,
+        round: result.properties.round,
+        seatType: result.properties.seatType,
       }
     })()
   }
@@ -65,12 +69,23 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
       },
       {
         display_type: 'number',
-        trait_type: 'Type',
-        value: properties.type,
+        trait_type: 'showType',
+        value: properties.showType,
       },
       {
-        trait_type: 'Grade',
-        value: Grade[properties.grade],
+        display_type: 'number',
+        trait_type: 'Round',
+        value: properties.round,
+      },
+      {
+        display_type: 'number',
+        trait_type: 'Seat',
+        value: properties.seat,
+      },
+      {
+        display_type: 'number',
+        trait_type: 'SeatType',
+        value: properties.seatType,
       },
     ]
   }

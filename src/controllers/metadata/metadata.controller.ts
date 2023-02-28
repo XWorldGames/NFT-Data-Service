@@ -22,6 +22,7 @@ export class MetadataController {
   async get(@Param('collectionId') collectionId: number, @Param('tokenId') tokenId: string): Promise<any> {
     const id = Number(tokenId.length === 64 ? `0x${tokenId}` : tokenId)
     const metadata = await this.metadataService.findByTokenId(collectionId, id)
+    console.log(metadata)
     if (metadata) {
       const data = metadata.value
       const imageUrl = this.imageUrlTemplate[collectionId].replace('{collectionId}', `${collectionId}`).replace('{tokenId}', `${id}`)

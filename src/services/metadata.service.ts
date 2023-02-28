@@ -42,12 +42,13 @@ export class MetadataService {
         token['iccv'] = this.dataRepository.getImageCompositionConfiguration(collectionId).version
       }
     } catch (error) {
+      console.log(error)
       if (error.code !== 'CALL_EXCEPTION') {
         logger.error(`[SERVICE] MetadataService.findByTokenId(${collectionId}, ${tokenId}), Message:: ${error.message}`)
         return metadata || null
       }
     }
-
+    console.log("token = "+token)
     if (token) {
       const hash = objectHash(token)
       if (!metadata || hash !== metadata.hash) {

@@ -42,7 +42,9 @@ module.exports = {
       error: './logs/error.log', // pm2 error log file
       env: {
         // environment variable
-        PORT: 3000,
+        IMAGE_PORT: 9001,
+        METADATA_PORT: 9002,
+        DATABASE_PORT: 9003,
         NODE_ENV: 'development',
       },
     },

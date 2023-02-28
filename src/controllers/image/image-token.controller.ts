@@ -5,6 +5,7 @@ import { NotModifiedResponse } from '@/http/not-modified.response'
 import { IImageResizingOptions } from '@/image-processors/image-resizing-processor'
 import { AbstractImageController } from '@controllers/abstract.image.controller'
 import { HttpNotFoundException } from '@exceptions/http-not-found.exception'
+import { token } from 'morgan'
 import { Controller, Get, Param } from 'routing-controllers'
 import { Service } from 'typedi'
 
@@ -14,10 +15,11 @@ export class ImageTokenController extends AbstractImageController {
   @Get('/tokens/:collectionId([0-9]+)/:tokenId([0-9]+):resizing([.@][.0-9a-z_]+)?')
   async get(
     @Param('collectionId') collectionId: number,
-    @Param('tokenId') tokenId: number,
+    @Param('tokenId') tokenId: string,
     @ImageResizingParam('resizing') resizingOptions?: IImageResizingOptions,
     @KnownHashParam() knownHash?: string,
   ): Promise<IHashedImageEntity | NotModifiedResponse> {
+    console.log("tokenId = "+tokenId)
     const image = await this.imageService.findTokenImage(collectionId, tokenId, resizingOptions, knownHash)
     if (image) {
       return image === true ? new NotModifiedResponse(knownHash) : image

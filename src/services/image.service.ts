@@ -37,7 +37,7 @@ export class ImageService {
 
   public async findTokenImage(
     collectionId: number,
-    tokenId: number,
+    tokenId: string,
     resizeOptions?: IImageResizingOptions,
     knownHash?: string,
   ): Promise<IHashedImageEntity | true | null> {

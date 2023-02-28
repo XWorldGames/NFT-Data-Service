@@ -58,7 +58,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
   transformAttributes(properties: ITokenMetadataProperties) {
     return [
       {
-        display_type: 'number',
+        display_type: 'string',
         trait_type: 'ID',
         value: properties.id,
       },

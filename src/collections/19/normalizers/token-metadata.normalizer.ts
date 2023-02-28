@@ -89,7 +89,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     ]
   }
 
-  mock(identifier: number, data: any): ITokenMetadata {
+  mock(identifier: string, data: any): ITokenMetadata {
     return null
   }
 }

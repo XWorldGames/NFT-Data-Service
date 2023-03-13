@@ -8,7 +8,7 @@ import { DataRepository } from '../repositories/data.repository'
 
 export interface ITokenMetadataProperties {
   showType: number
-  id: string
+  identifier: string
   character: number
   seat: number
   seatType: number
@@ -59,7 +59,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
       {
         display_type: 'string',
         trait_type: 'ID',
-        value: properties.id,
+        value: properties.identifier,
       },
       {
         display_type: 'number',

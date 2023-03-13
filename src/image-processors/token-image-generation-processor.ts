@@ -262,7 +262,7 @@ export class TokenImageGenerationProcessor {
 
   private async resolveElement(element: IImageCompositionElement, metadata: ITokenMetadata): Promise<ResolvedElement> {
     const { width, height, fit, position, resource } = element
-    const resources = await this.resolveResource(resource, metadata, 'animation' in element ? element['animation'] : null)
+    const resources = await this.resolveResource(resource, metadata, null)
     let w = 0
     let h = 0
     for (let i = 0, m = resources.length; i < m; ++i) {

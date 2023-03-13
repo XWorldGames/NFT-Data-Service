@@ -29,7 +29,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     }
 
     return new (class implements ITokenMetadata {
-      id = Number(tokenId)
+      id = tokenId+""
       collection_id = id
       identifier = null
       name = data.name

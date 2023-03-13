@@ -26,7 +26,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     const winningPoints = Number(data.NFTTypeID)
 
     return new (class implements ITokenMetadata {
-      id = Number(tokenId)
+      id = tokenId+""
       collection_id = id
       identifier = null
       name = `Level Prize`

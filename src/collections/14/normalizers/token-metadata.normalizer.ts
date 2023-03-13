@@ -71,7 +71,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
         .toNumber()
 
       return new (class implements ITokenMetadata {
-        id = Number(tokenId)
+        id = tokenId+""
         collection_id = id
         identifier = result.id
         code = result.code
@@ -102,7 +102,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
       }
 
       return new (class implements ITokenMetadata {
-        id = Number(tokenId)
+        id = tokenId+""
         collection_id = id
         identifier = result.id
         code = result.code

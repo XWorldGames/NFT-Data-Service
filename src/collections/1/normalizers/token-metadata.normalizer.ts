@@ -1,4 +1,4 @@
-import { CharacterClass, CharacterRace, Element, Grade} from "@/enums"
+import { CharacterClass, CharacterRace, Element, Grade } from "@/enums"
 import { ITokenMetadata as ITokenMetadataBase } from '@/interfaces/token-metadata.interface'
 import { ITokenMetadataNormalizer } from '@/interfaces/token-metadata.normalizer.interface'
 import { isEmpty } from '@utils/util'
@@ -74,7 +74,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     })
 
     return new (class implements ITokenMetadata {
-      id = Number(tokenId)
+      id = tokenId + ""
       collection_id = id
       identifier = character.id
       code = character.code
@@ -180,7 +180,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     const skills = { 1: [], 2: [] }
 
     return new (class implements ITokenMetadata {
-      id = 0
+      id = "0"
       collection_id = id
       identifier = character.id
       code = character.code

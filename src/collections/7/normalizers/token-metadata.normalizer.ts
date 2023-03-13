@@ -45,7 +45,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     const kind = talent.properties.kind
 
     return new (class implements ITokenMetadata {
-      id = Number(tokenId)
+      id = tokenId+""
       collection_id = id
       identifier = talent.id
       code = talent.code
@@ -118,7 +118,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     const kind = talent.properties.kind
 
     return new (class implements ITokenMetadata {
-      id = 0
+      id = "0"
       collection_id = id
       identifier = talent.id
       code = talent.code

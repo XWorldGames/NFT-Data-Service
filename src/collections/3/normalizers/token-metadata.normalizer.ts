@@ -22,7 +22,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     const type = Number(data.mbType)
 
     return new (class implements ITokenMetadata {
-      id = Number(tokenId)
+      id = tokenId+""
       collection_id = id
       identifier = type
       name = `Mystery Box of Equipment`

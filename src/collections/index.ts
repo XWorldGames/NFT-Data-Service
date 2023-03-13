@@ -15,4 +15,4 @@ import '@/collections/7'
 import '@/collections/8'
 import '@/collections/9'
 
-import '@/collections/19'
+import '@/collections/17'

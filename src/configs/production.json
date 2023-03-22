@@ -15,7 +15,7 @@
     "cert": "../certs/server.crt"
   },
   "node": {
-    "endpoint": "https://bsc.node.xwg.games/"
+    "endpoint": "https://nd-939-370-462.p2pify.com/a421acc03427debe07bed98b435cabd7"
   },
   "contracts": {
     "1": "0x88881808f5C6C0B25D5F4c2523E3948c33857013",

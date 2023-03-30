@@ -25,7 +25,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     if (isEmpty(data)) {
       return null
     }
-    data = this.dataRepository.getTokens().find(item => item.id === tokenId)
+    data = this.dataRepository.getTokens().find(item => item.id == tokenId)
     if (isEmpty(data)) {
       return null
     }

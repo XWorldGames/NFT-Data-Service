@@ -17,7 +17,7 @@ export interface ITokenMetadata extends ITokenMetadataBase {
 
 @Service()
 export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
-  constructor(private readonly dataRepository: DataRepository) {}
+  constructor(private readonly dataRepository: DataRepository) { }
 
   normalize(tokenId: number, data: any): ITokenMetadata | null {
     if (isEmpty(data)) {
@@ -29,7 +29,7 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
     }
 
     return new (class implements ITokenMetadata {
-      id = tokenId+""
+      id = tokenId + ""
       collection_id = id
       identifier = null
       name = data.name

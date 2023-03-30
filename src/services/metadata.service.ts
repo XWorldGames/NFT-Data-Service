@@ -39,7 +39,9 @@ export class MetadataService {
       const data = await this.tokenRepository.get(collectionId, tokenId)
       if (data !== undefined && data !== null) {
         token = this.normalizers[collectionId].normalize(tokenId, data)
-        // token['iccv'] = this.dataRepository.getImageCompositionConfiguration(collectionId).version
+        if(token){
+          token['iccv'] = this.dataRepository.getImageCompositionConfiguration(collectionId).version
+        }
       }
     } catch (error) {
       // console.log(error)

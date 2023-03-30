@@ -20,6 +20,8 @@ export class TokenMetadataNormalizer implements ITokenMetadataNormalizer {
   constructor(private readonly dataRepository: DataRepository) { }
 
   normalize(tokenId: number, data: any): ITokenMetadata | null {
+    console.log("tokenId = "+tokenId)
+    console.log("data = "+data)
     if (isEmpty(data)) {
       return null
     }

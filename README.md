@@ -1,8 +1,8 @@
-# X World Games NFT Data Service
+# X Marketplace Data Oracle
 
 ## Introduction
 
-The NFTDS (NFT Data Service) is a service that provides unified access to data resources for all X World Games NFT products. You can get all public data resources through this service.
+The NFTDS (NFT Data Service) is a service that provides unified access to data resources for all X Marketplace. You can get all public data resources through this service.
 
 ## URL Template Parameters
 
